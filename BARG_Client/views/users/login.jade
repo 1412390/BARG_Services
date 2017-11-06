@@ -1,0 +1,23 @@
+extends layout
+block content
+    div#login
+        .main
+            .container
+                .row
+                    .col-md-6.col-md-offset-3
+                        h1.display-4.m-b-2 #{title}
+                        if !success
+                            each err in errors
+                                div.alert.alert-danger(role='alert') #{err.msg}
+                        // login form
+                        form(method='POST' action='/users/login')
+                            div.form-group
+                                label(for='username') Username:
+                                input#username.form-control(type='text' name='username' value='#{username}' minlength="4" maxlength="15" required)
+                            div.form-group
+                                label(for='pw') Password:
+                                input#pw.form-control(type='password' name='password' minlength="8" maxlength="64" required)
+                            button.btn.btn-success(type='submit' style="margin-right:10px")
+                                | Login
+                            a.btn.btn-primary(href='/users/register')
+                                | Register
