@@ -158,7 +158,6 @@ router.post('/register', function (req, res, next) {
         });
     }
 });
-
 router.get('/profile', function (req, res, next) {
 
     let login = localStorage.getItem('login');
@@ -171,6 +170,69 @@ router.get('/profile', function (req, res, next) {
     else {
         return res.redirect('/users/login');
     }
+});
+router.get('/get-information', function (req, res, next) {
+
+    let login = localStorage.getItem('login');
+
+    if(login){//true
+
+        let token = localStorage.getItem('token');
+
+        const data = {
+            token: token
+        };
+
+        let url = config.URL_SERVER + "/users/get-information";
+
+        axios.post(url, data).then(
+            response => {
+
+                let success = response.data.success;
+                if(success){
+
+                   return res.render('users/helper/information', {user: response.data.user});
+                }
+                else {
+                    console.log(response.data.error);
+                }
+            }
+        ).catch(function () {
+
+        })
+
+    }
+    else {
+        return res.redirect('/users/login');
+    }
+
+});
+router.get('/get-switchboard', function (req, res ,next) {
+
+    res.render('users/helper/switchboard');
+});
+router.post('/switchboard', function(req, res, next){
+
+    let address = req.body.address;
+    let opt_selected = req.body.select;
+    let note = req.body.ckeditor;
+
+    const data = {
+        address: address, //address get guess
+        type: opt_selected,  //type car 0: normal, 1: premium
+        note: note, // note
+    };
+
+    const url = config.URL_SERVER + "/users/switchboard";
+
+    axios.post(url, data).then(
+        response => {
+
+        }
+    ).catch(function(){
+
+    });
+
 });
 router.get('/logout', function (req, res, next) {
 

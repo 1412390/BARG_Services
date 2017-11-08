@@ -29,14 +29,11 @@ router.post('/login', function (req, res, next) {
         let hash = data[0].password;
         bcrypt.compare(password, hash).then(
           function (response) {
-            console.log(response);
             if (response === true) {
-              var payload = {
+              let payload = {
                 user_id: data[0].id
               };
-              var token = jwt.sign(payload, secretOrPrivateKey, {
-                expiresIn: 1440 // expires in 24 hours
-              });
+              let token = jwt.sign(payload, secretOrPrivateKey);
               return res.json({
                 success: true,
                 msg: 'Enjoy your token!',
@@ -105,5 +102,45 @@ router.post('/register', function (req, res, next) {
     }
   );
 });
+router.post('/get-information', function (req, res, next) {
 
+  let token = req.body.token;
+
+  jwt.verify(token, secretOrPrivateKey, function (error, decoded) {
+
+    if (error)
+      return res.json({ success: false, error: error });
+
+    let user_id = decoded.user_id;
+
+    const sql = `select* from user where id = ${user_id}`;
+
+    let get_data = db.load(sql).then(
+      data => {
+
+        let dob = new Date(data[0].dob * 1000);
+        data[0].dob = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
+        return res.json({
+          success: true,
+          user: data[0]
+        });
+      },
+      err => {
+        console.log(err + "");
+      }
+    );
+  });
+});
+
+router.post('/switchboard', function (req, res, next) {
+
+  let address = req.body.address, //address get guess
+    type = req.body.type,  //type car 0: normal, 1: premium
+    note = req.body.note // note
+
+  console.log(address);
+  console.log(type);
+  console.log(note);
+
+});
 module.exports = router;

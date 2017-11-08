@@ -8,4 +8,25 @@ $(document).ready(function () {
         });
     });
 
+    $('a.list-group-item.list-group-item-action').on('click', function () {
+
+        const id = $(this).attr('id');
+        let url = '';
+        switch (parseInt(id)){// infor account
+            case 1:
+                url = "/users/get-information";
+                break;
+            case 2://switchboard
+                url = "/users/get-switchboard"
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                return;
+        }
+        $('.right-main-body').load(url);
+    });
+
 });

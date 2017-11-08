@@ -7,7 +7,6 @@ let bodyParser = require('body-parser');
 let expressValidator = require('express-validator');
 let index = require('./routes/index');
 let users = require('./routes/users');
-
 let app = express();
 
 // view engine setup

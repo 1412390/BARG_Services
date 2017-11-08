@@ -1,0 +1,23 @@
+.col-md-6.col-md-offset-3
+    form(action="/users/switchboard" method="POST")
+        .form-group
+            label(for="address")
+                | Địa chỉ đón khách
+                span.red
+                    | *
+            input.form-control(type="text",id="address" name="address" required placeholder="Enter address.." maxlength="100")
+        .form-group
+            label(for="select")
+                | Lọai xe
+                span.red
+                    | *
+            select.form-control(id="select" name="select")
+                option(value="0") Thường
+                option(value="1") Premium
+        .form-group
+            label(for="ckeditor")
+                | Ghi chú
+            textarea#ckeditor(name="ckeditor")
+        input#submit(type="submit" class="btn btn-success" value="Submit")
+script(type='text/javascript').
+    CKEDITOR.replace( 'ckeditor' );
