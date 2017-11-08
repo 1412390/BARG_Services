@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 //storage
-var LocalStorage = require('node-localstorage').LocalStorage,
+let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log('login' + localStorage.getItem('login'));

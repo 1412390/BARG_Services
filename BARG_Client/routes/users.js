@@ -2,14 +2,15 @@ let express = require('express');
 let router = express.Router();
 let axios = require('axios');
 //storage
-var LocalStorage = require('node-localstorage').LocalStorage,
+let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
 let config = require('../../BARG_Client/config.js');
+
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
-
 router.get('/login', function (req, res, next) {
 
     res.render('users/login', {

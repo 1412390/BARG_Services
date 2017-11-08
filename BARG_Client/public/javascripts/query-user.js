@@ -24,7 +24,10 @@ $(document).ready(function () {
             case 4:
                 break;
             default:
-                return;
+                break;
+        }
+        if(url === ''){
+            return;
         }
         $('.right-main-body').load(url);
     });

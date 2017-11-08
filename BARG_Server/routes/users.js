@@ -6,10 +6,25 @@ const jwt = require(config.JWT); // used to create, sign, and verify tokens
 const secretOrPrivateKey = config.secretOrPrivateKey;
 const bcrypt = require(config.Bcrypt);
 const saltRounds = config.saltRounds;
+
+//firebase
+const firebase   = require('firebase');
+
+// Initialize Firebase
+const config_firebase = {
+    apiKey: "AIzaSyBMtvxvxXChTx_4ZSeZp5J7ZXjkmP-EW2c",
+    authDomain: "bargservices.firebaseapp.com",
+    databaseURL: "https://bargservices.firebaseio.com",
+    projectId: "bargservices",
+    storageBucket: "bargservices.appspot.com",
+    messagingSenderId: "209203741837"
+};
+firebase.initializeApp(config_firebase);
+
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+  res.send('respond with a resource');});
 router.post('/login', function (req, res, next) {
 
   let username = req.body.username;
@@ -52,8 +67,7 @@ router.post('/login', function (req, res, next) {
     },
     err => {
       console.log(err + "");
-    });
-});
+    });});
 router.post('/register', function (req, res, next) {
 
   let
@@ -77,12 +91,13 @@ router.post('/register', function (req, res, next) {
       else {
         bcrypt.hash(password, saltRounds).then(function (hash) {
           // Store hash in your password DB.
-          const sql = `INSERT INTO user(username, password, name, email, dob) VALUES (
+          const sql = `INSERT INTO user(username, password, name, email, dob, role) VALUES (
             '${username}',
             '${hash}',
             '${name}',
             '${email}',
-            ${dob}
+            ${dob},
+            -1
           )`;
           db.insert(sql).then(
             data => {
@@ -100,8 +115,7 @@ router.post('/register', function (req, res, next) {
     err => {
       console.log(err + "");
     }
-  );
-});
+  );});
 router.post('/get-information', function (req, res, next) {
 
   let token = req.body.token;
@@ -129,8 +143,7 @@ router.post('/get-information', function (req, res, next) {
         console.log(err + "");
       }
     );
-  });
-});
+  });});
 
 router.post('/switchboard', function (req, res, next) {
 
@@ -138,9 +151,25 @@ router.post('/switchboard', function (req, res, next) {
     type = req.body.type,  //type car 0: normal, 1: premium
     note = req.body.note // note
 
-  console.log(address);
-  console.log(type);
-  console.log(note);
-
+  const sql = `INSERT INTO locate(address, type, note) VALUES (
+    '${address}',
+    ${type},
+    '${note}'
+  )`;
+  db.insert(sql).then(
+    data=>{
+      
+      let db_firebase = firebase.database();
+      db_firebase.ref('locate').child('point' + data).set({
+        address: address,
+        type: type,
+        note: note
+      });
+      console.log('successful')
+    },
+    err =>{
+      console.log(err + "");
+    }
+  )
 });
 module.exports = router;
