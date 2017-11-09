@@ -7,7 +7,6 @@
 var app = require('../app');
 var debug = require('debug')('barg-server:server');
 var http = require('http');
-
 /**
  * Get port from environment and store in Express.
  */
@@ -20,10 +19,8 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
-io.on('connection', function(){ 
-  console.log('server listened');
-});
+var io = require('../routes/io.js').initialize(server);
+
 /**
  * Listen on provided port, on all network interfaces.
  */

@@ -6,25 +6,15 @@ const jwt = require(config.JWT); // used to create, sign, and verify tokens
 const secretOrPrivateKey = config.secretOrPrivateKey;
 const bcrypt = require(config.Bcrypt);
 const saltRounds = config.saltRounds;
-
-//firebase
-const firebase   = require('firebase');
-
-// Initialize Firebase
-const config_firebase = {
-    apiKey: "AIzaSyBMtvxvxXChTx_4ZSeZp5J7ZXjkmP-EW2c",
-    authDomain: "bargservices.firebaseapp.com",
-    databaseURL: "https://bargservices.firebaseio.com",
-    projectId: "bargservices",
-    storageBucket: "bargservices.appspot.com",
-    messagingSenderId: "209203741837"
-};
-firebase.initializeApp(config_firebase);
+const LocalStorage = require('node-localstorage').LocalStorage,
+  localStorage = new LocalStorage('./scratch');
+let io = require('../routes/io.js').getSIO();
 
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');});
+  res.send('respond with a resource');
+});
 router.post('/login', function (req, res, next) {
 
   let username = req.body.username;
@@ -67,7 +57,8 @@ router.post('/login', function (req, res, next) {
     },
     err => {
       console.log(err + "");
-    });});
+    });
+});
 router.post('/register', function (req, res, next) {
 
   let
@@ -115,7 +106,8 @@ router.post('/register', function (req, res, next) {
     err => {
       console.log(err + "");
     }
-  );});
+  );
+});
 router.post('/get-information', function (req, res, next) {
 
   let token = req.body.token;
@@ -143,7 +135,8 @@ router.post('/get-information', function (req, res, next) {
         console.log(err + "");
       }
     );
-  });});
+  });
+});
 
 router.post('/switchboard', function (req, res, next) {
 
@@ -157,17 +150,22 @@ router.post('/switchboard', function (req, res, next) {
     '${note}'
   )`;
   db.insert(sql).then(
-    data=>{
-      
-      let db_firebase = firebase.database();
-      db_firebase.ref('locate').child('point' + data).set({
+    data => {
+      const point = {
         address: address,
         type: type,
         note: note
-      });
-      console.log('successful')
+      };
+      let ls_client = JSON.parse(localStorage.getItem("ls_client"));
+      //gửi data private bằng io
+      if (ls_client[1]) {
+        console.log('send data ');
+        io.to(ls_client[1]).emit('send-data', point); //locate    
+      }
+
+      console.log('successful');
     },
-    err =>{
+    err => {
       console.log(err + "");
     }
   )

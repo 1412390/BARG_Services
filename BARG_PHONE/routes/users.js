@@ -4,7 +4,7 @@ let axios = require('axios');
 //storage
 let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
-let config = require('../../BARG_Client/config.js');
+let config = require('../../BARG_PHONE/config.js');
 
 
 /* GET users listing. */
