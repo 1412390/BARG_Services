@@ -5,7 +5,7 @@ let axios = require('axios');
 let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
 let config = require('../../BARG_PHONE/config.js');
-
+let socket = require('socket.io-client')("http://localhost:8000");
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -222,17 +222,8 @@ router.post('/switchboard', function(req, res, next){
         type: opt_selected,  //type car 0: normal, 1: premium
         note: note, // note
     };
-
-    const url = config.URL_SERVER + "/users/switchboard";
-
-    axios.post(url, data).then(
-        response => {
-
-        }
-    ).catch(function(){
-
-    });
-
+    socket.emit("send-data-to-locate", data);
+    res.redirect('/users/profile');
 });
 router.get('/logout', function (req, res, next) {
 

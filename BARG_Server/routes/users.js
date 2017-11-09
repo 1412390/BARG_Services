@@ -8,7 +8,7 @@ const bcrypt = require(config.Bcrypt);
 const saltRounds = config.saltRounds;
 const LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
-let io = require('../routes/io.js').getSIO();
+
 
 
 /* GET users listing. */
@@ -138,36 +138,4 @@ router.post('/get-information', function (req, res, next) {
   });
 });
 
-router.post('/switchboard', function (req, res, next) {
-
-  let address = req.body.address, //address get guess
-    type = req.body.type,  //type car 0: normal, 1: premium
-    note = req.body.note // note
-
-  const sql = `INSERT INTO locate(address, type, note) VALUES (
-    '${address}',
-    ${type},
-    '${note}'
-  )`;
-  db.insert(sql).then(
-    data => {
-      const point = {
-        address: address,
-        type: type,
-        note: note
-      };
-      let ls_client = JSON.parse(localStorage.getItem("ls_client"));
-      //gửi data private bằng io
-      if (ls_client[1]) {
-        console.log('send data ');
-        io.to(ls_client[1]).emit('send-data', point); //locate    
-      }
-
-      console.log('successful');
-    },
-    err => {
-      console.log(err + "");
-    }
-  )
-});
 module.exports = router;

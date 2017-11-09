@@ -1,21 +1,47 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  script.
+    #floating-panel
+        input#address(type='textbox', value='Sydney, NSW')
+        input#submit(type='button', value='Geocode')
+    #map
 
-      $(document).ready(function () {
-
-          alert('aaaa');
-          var socket = io('http://localhost:8000');
-          socket.on('connect', function () {
-              socket.emit("LOCATE","Locate hello server")
-          });
-          socket.on('Server_message',function(data){
-              console.log("locate_data",data)
-          })
-        //-   socket.on('send-data', function (data) {
-        //-       console.log(data);
-        //-   });
-      });
+    script.
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: {lat: -34.397, lng: 150.644},
+            });
+            var geocoder = new google.maps.Geocoder();
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
+        }
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location,
+                    });
+                    if (results[0].geometry.viewport)
+                        resultsMap.fitBounds(results[0].geometry.viewport);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        $(document).ready(function () {
+            var socket = io('http://localhost:8000');
+            socket.on('connect', function () {
+                socket.emit("LOCATE");
+            });
+            socket.on('recieve-data-from-phone', function (data) {
+                console.log("data recieved: ", data.address);
+                $('#address').val(data.address);
+                $('#submit').trigger('click');
+            });
+        });
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7g2FscTKbTHcSpWNvuX6EFWSm81zprQ&callback=initMap')

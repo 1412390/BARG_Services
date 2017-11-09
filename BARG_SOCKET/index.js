@@ -1,4 +1,3 @@
-
 var app = require("http").createServer()
 const io = require("socket.io")(app)
 
@@ -8,24 +7,24 @@ const PHONE = {
     client: "PHONE"
 }
 const LOCATE = {
-    socket_id:null,
+    socket_id:[],
     client: "LOCATE" 
 }
 io.on('connection', function (socket) {
 
     socket.on('LOCATE', function (data) {
-        LOCATE.socket_id = socket.id
-        io.to(PHONE.socket_id).emit("Server_message","locate hello phone")
-        console.log('locate connect ',LOCATE);
+        LOCATE.socket_id.push(socket.id);
     });
     socket.on('PHONE', function (data) {
         PHONE.socket_id = socket.id
-        console.log('phone connected ',PHONE);
     });
-    socket.on('PHONE_SUBMIT', function (data) {
-        console.log('phone connected ',PHONE);
+    socket.on('send-data-to-locate', function (data) {
+        if(LOCATE.socket_id!==null){
+            var shift = LOCATE.socket_id.shift();
+            io.to(shift).emit("recieve-data-from-phone",data);
+        }
     });
 });
 app.listen(8000, () => {
-    console.log("server running port 8080!")
+    console.log("server running port 8000!")
 })
