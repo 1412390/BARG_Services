@@ -4,7 +4,7 @@ let axios = require('axios');
 //storage
 let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
-let config = require('../../BARG_Client/config.js');
+let config = require('../../BARG_PHONE/config');
 
 
 /* GET users listing. */
@@ -24,7 +24,6 @@ router.post('/login', function (req, res, next) {
 
     let username = req.body.username;
     let password = req.body.password;
-
     req.checkBody('username', 'Username field is not empty').notEmpty();
     req.checkBody('username', 'Username must be between 4-15 character long!').len(4, 15);
     req.checkBody('password', 'Password field is not empty').notEmpty();
