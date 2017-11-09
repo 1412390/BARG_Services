@@ -3,3 +3,19 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  script.
+
+      $(document).ready(function () {
+
+          alert('aaaa');
+          var socket = io('http://localhost:8080');
+          socket.on('connect', function () {
+              console.log(
+                  'Client 1 connected to server !'
+              );
+              socket.emit('client_id', 1);
+          });
+          socket.on('send-data', function (data) {
+              console.log(data);
+          });
+      });
