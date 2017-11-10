@@ -1,0 +1,83 @@
+extends layout/layout_2
+
+block content
+
+    #floating-panel
+        form
+            .form-group
+                label(for='address') Address:
+                input#address.form-control(type='textbox')
+            .form-group
+                label(for='info') Geocode:
+                input#info.form-control(type='textbox')
+            input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
+
+    #map
+    script.
+        var map;
+        var geocoder;
+        var marker;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: {lat: -34.397, lng: 150.644},
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            geocoder = new google.maps.Geocoder();
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
+        }
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function (responses) {
+                if (responses && responses.length > 0) {
+                    document.getElementById('info').value = responses[0].formatted_address;
+                } else {
+                    document.getElementById('info').value = 'Cannot determine address at this location.';
+                }
+            });
+        }
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location,
+                        draggable: true,
+                    });
+                    google.maps.event.addListener(marker, 'dragend', function () {
+                        geocodePosition(marker.getPosition());
+                    });
+                    google.maps.event.addListener(marker, 'click', function () {
+                        if (marker.formatted_address) {
+                            document.getElementById('info').value = marker.formatted_address + "<br>coordinates: " + marker.getPosition().toUrlValue(6);
+                        } else {
+                           //document.getElementById('info').value = address + "<br>coordinates: " + marker.getPosition().toUrlValue(6);
+                            document.getElementById('info').value = address;
+                        }
+                        //infowindow.open(map, marker);
+                    });
+                    google.maps.event.trigger(marker, 'click');
+                    if (results[0].geometry.viewport)
+                        resultsMap.fitBounds(results[0].geometry.viewport);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        $(document).ready(function () {
+            var socket = io('http://localhost:8000');
+            socket.on('connect', function () {
+                socket.emit("LOCATE");
+            });
+            socket.on('recieve-data-from-phonis', function (data) {
+                $('#address').val(data.address);
+                $('#submit').trigger('click');
+                socket.on('disconnect');
+            });
+        });
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7g2FscTKbTHcSpWNvuX6EFWSm81zprQ&callback=initMap')

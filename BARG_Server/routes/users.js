@@ -9,8 +9,6 @@ const saltRounds = config.saltRounds;
 const LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
 
-
-
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -137,5 +135,58 @@ router.post('/get-information', function (req, res, next) {
     );
   });
 });
+router.post('/set-queue-locater', function (req, res, next) {
 
+  let address = req.body.address,
+    type = req.body.type,
+    note = req.body.note;
+
+  const sql = `INSERT INTO point(address, type, note) VALUES (
+    '${address}',
+    ${type},
+    '${note}'
+  )`;
+  db.insert(sql).then(
+    data => {
+      res.json({
+        success: true,
+        id: data
+      });
+    },
+    err => {
+      console.log(err + "");
+    }
+  )
+});
+router.get('/get-queue-locater', function (req, res, next) {
+
+  const sql = `SELECT* FROM point LIMIT 1`;
+  db.load(sql).then(
+    data => {
+      if (data.length > 0) {
+        const sql_pop = `DELETE FROM point WHERE id = ${data[0].id}`;
+        db.load(sql_pop).then(
+          result => {
+            return res.json({
+              success: true,
+              data: data[0]
+            });
+          },
+          err => {
+            console.log(err + "");
+          }
+        );
+      }
+      else {
+        return res.json({
+          success: false,
+          data: null
+        });
+      }
+    },
+    err => {
+      console.log(err + "");
+    }
+  )
+});
 module.exports = router;

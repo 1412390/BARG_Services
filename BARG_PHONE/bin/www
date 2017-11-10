@@ -20,12 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var socket = require('socket.io-client')("http://localhost:8000");
 
-// Add a connect listener
-socket.on('connect', function () {
-  socket.emit("PHONE");
-});
 /**
  * Listen on provided port, on all network interfaces.
  */

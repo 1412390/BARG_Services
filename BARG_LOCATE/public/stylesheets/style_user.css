@@ -1,0 +1,24 @@
+/*css users/login.jade*/
+#login{
+
+    background-image: url('../images/user/background_user.png');
+    height: 650px;
+    margin-top: 20px;
+    padding-top: 100px;
+}
+/*=================================================================*/
+/*css users/register.jade*/
+#register{
+    background-image: url('../images/user/background_user.png');
+    height: 650px;
+    margin-top: 20px;
+
+
+}
+/*=================================================================*/
+h1.display-4.m-b-2{
+    color: white;
+}
+label{
+    color: white;
+}

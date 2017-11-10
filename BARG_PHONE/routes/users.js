@@ -4,8 +4,8 @@ let axios = require('axios');
 //storage
 let LocalStorage = require('node-localstorage').LocalStorage,
     localStorage = new LocalStorage('./scratch');
-let config = require('../../BARG_PHONE/config.js');
-let socket = require('socket.io-client')("http://localhost:8000");
+let config = require('../config.js');
+let socket = require('socket.io-client')(config.URL_SOCKET);
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -217,12 +217,17 @@ router.post('/switchboard', function(req, res, next){
     let opt_selected = req.body.select;
     let note = req.body.ckeditor;
 
+    // Add a connect listener
+    socket.on('connect', function () {
+        socket.emit("PHONE");
+    });
+
     const data = {
         address: address, //address get guess
         type: opt_selected,  //type car 0: normal, 1: premium
         note: note, // note
     };
-    socket.emit("send-data-to-locate", data);
+    socket.emit("send-data-to-locater", data);
     res.redirect('/users/profile');
 });
 router.get('/logout', function (req, res, next) {

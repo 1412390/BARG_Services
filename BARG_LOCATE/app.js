@@ -7,7 +7,7 @@ let bodyParser = require('body-parser');
 let index = require('./routes/index');
 let users = require('./routes/users');
 let app = express();
-
+var expressValidator = require('express-validator');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(expressValidator());
 app.use('/', index);
 app.use('/users', users);
 
