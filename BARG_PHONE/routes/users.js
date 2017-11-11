@@ -13,7 +13,11 @@ router.get('/', function (req, res, next) {
 });
 router.get('/login', function (req, res, next) {
 
-    res.render('users/login', {
+    let isLogin = localStorage.getItem('login');
+    if(isLogin){
+        return res.redirect('/users/profile');
+    }
+    return res.render('users/login', {
         title: "Login page",
         username: "",
         success: true,

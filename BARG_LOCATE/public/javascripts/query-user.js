@@ -26,6 +26,11 @@ $(document).ready(function () {
         if(url === ''){
             return;
         }
+        $('a.list-group-item.list-group-item-action').each(function () {
+
+            $(this).removeClass('active');
+        });
+        $(this).addClass('active');
         $('.right-main-body').load(url);
     });
 

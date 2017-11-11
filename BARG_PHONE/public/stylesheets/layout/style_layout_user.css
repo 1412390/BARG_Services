@@ -18,7 +18,10 @@ body{
 .left-main{
     width: 25%;
     float: left;
+}
 
+.left-main ul.list-group{
+    height: 500px;
 }
 
 .right-main{
@@ -27,8 +30,13 @@ body{
 }
 
 .right-main-header{
+    margin-top: 2px;
     height: 154px;
     border: 1px solid gainsboro;
+    background-image: url("../images/right-main-header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .right-main-body{
