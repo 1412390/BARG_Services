@@ -17,17 +17,24 @@ block content
         var map;
         var geocoder;
         var marker;
+        var motobike;
+        var motobike_arr=[]
+        var default_position = {lat:10.7666851, lng: 106.641758};
+
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 8,
-                center: {lat: -34.397, lng: 150.644},
+                zoom: 13,
+                center: default_position,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+            generateMotoBikeLocation(default_position, map ,true)
             geocoder = new google.maps.Geocoder();
             document.getElementById('submit').addEventListener('click', function () {
+                clearOverlays();
                 geocodeAddress(geocoder, map);
             });
         }
+
         function geocodePosition(pos) {
             geocoder.geocode({
                 latLng: pos
@@ -39,6 +46,38 @@ block content
                 }
             });
         }
+        function generateMotoBikeLocation(location, map, first){
+            icon = {
+                url: 'https://image.flaticon.com/icons/svg/296/296210.svg',
+                scaledSize: new google.maps.Size(50, 50), 
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(30, 30)
+            };
+            let max =10           
+            if(first)
+                max = 100
+            for (let i =0;i< max ;i++){
+                let fix_lat = i % 2 == 0 ? -1 : 1
+                let fix_lng = i % 2 != 0 ? -1 : 1
+                let pos = {
+                    lat: i*(Math.random())/2000 * fix_lat + location.lat,
+                    lng: i*(Math.random())/2000 * fix_lng + location.lng
+                }
+                motobike = new google.maps.Marker({
+                    map: map,
+                    position: pos,
+                    icon:icon,
+                    draggable: true
+                })
+                motobike_arr.push(motobike)
+            }
+        }
+        function clearOverlays() {
+            for (var i = 0; i < motobike_arr.length; i++ ) {
+                motobike_arr[i].setMap(null);
+            }
+            motobike_arr.length = 0;
+        }
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function (results, status) {
@@ -49,6 +88,10 @@ block content
                         position: results[0].geometry.location,
                         draggable: true,
                     });
+                    generateMotoBikeLocation({
+                        lat:results[0].geometry.viewport.f.f,
+                        lng:results[0].geometry.viewport.b.b
+                    }, resultsMap)
                     google.maps.event.addListener(marker, 'dragend', function () {
                         geocodePosition(marker.getPosition());
                     });
@@ -75,6 +118,7 @@ block content
                 socket.emit("LOCATE");
             });
             socket.on('recieve-data-from-phonis', function (data) {
+                alert(data)
                 $('#address').val(data.address);
                 $('#submit').trigger('click');
                 socket.on('disconnect');
