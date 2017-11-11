@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2017 at 09:54 AM
+-- Generation Time: Nov 11, 2017 at 04:53 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -35,24 +35,15 @@ CREATE TABLE `history` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `locate`
+-- Table structure for table `point`
 --
 
-CREATE TABLE `locate` (
+CREATE TABLE `point` (
   `id` int(11) NOT NULL,
   `address` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'Địa chỉ đón khách',
   `type` int(1) NOT NULL COMMENT 'Loại xe (0: thường hoặc 1:PREMIUM) ',
   `note` text CHARACTER SET utf8mb4 NOT NULL COMMENT 'ghi chú'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `locate`
---
-
-INSERT INTO `locate` (`id`, `address`, `type`, `note`) VALUES
-(1, '384 su van hanh', 0, '<p>xe 4 cho</p>\r\n'),
-(2, '492 ly thuong kiet', 1, '<p>xe 7 cho</p>\r\n'),
-(3, '492 ly thuong kiet', 1, '<p>xe 7 cho</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -76,7 +67,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `email`, `dob`, `role`) VALUES
 (1, 'anhbap123', '$2a$10$10I8pXvL.LD7eF/XeWfkJOPI9D5p/WB7zzP6zPhjlQ5Hw3fleYqk6', 'hoang phat', 'thainguyenhoangphatit@gmail.com', 1509555600, 0),
-(2, 'htahg1998', '$2a$10$94mpzXZkaQe3xjoKGy.vI..1r5JsBENGZwZWN.GT71CT26SgtQQ5m', 'Kira Kun', 'htahg1998@gmail.com', 1507654800, -1);
+(2, 'htahg1998', '$2a$10$94mpzXZkaQe3xjoKGy.vI..1r5JsBENGZwZWN.GT71CT26SgtQQ5m', 'Kira Kun', 'htahg1998@gmail.com', 1507654800, -1),
+(3, 'jonijun', '$2a$10$9DlevJVh6.Xn7wHCh5NtOetYI5DjYZMXpOJPpJhSYQUmg8Id0ULOq', 'smo.bunnie', 'jonijun@gmaill.com', 1509469200, -1),
+(4, 'cmg255', '$2a$10$QdmrC4HRkb6sWNZIX/XkH.9d/YDeHMIqYSs2x1.IL4fCNpKiRCZwy', 'Công Ngủ', 'cmg255@gmail.com', 1509469200, -1);
 
 --
 -- Indexes for dumped tables
@@ -89,9 +82,9 @@ ALTER TABLE `history`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `locate`
+-- Indexes for table `point`
 --
-ALTER TABLE `locate`
+ALTER TABLE `point`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -111,16 +104,16 @@ ALTER TABLE `history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `locate`
+-- AUTO_INCREMENT for table `point`
 --
-ALTER TABLE `locate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `point`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
