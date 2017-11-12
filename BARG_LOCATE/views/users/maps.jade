@@ -4,13 +4,23 @@ block content
 
     #floating-panel
         form
-            .form-group
-                label(for='address') Địa chỉ gốc:
-                input#address.form-control(type='textbox')
-            .form-group
-                label(for='info') Địa chỉ định vị:
-                input#info.form-control(type='textbox')
-            input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
+            .row
+                .col
+                    //- label(for='address') Địa chỉ gốc:
+                    input#address.form-control(type='textbox', placeholder="Địa chỉ hiện tại",value="227 Nguyễn Văn Cừ")
+                .col
+                    //- label(for='info') Địa chỉ định vị:
+                    input#info.form-control(type='textbox', placeholder="Địa chỉ mới")
+                .col
+                    //- label(for="radius") Bán kính(m) :
+                    select#radius.form-control
+                        option(value="all") Tất cả
+                        option(value="600") 600m
+                        option(value="800") 800m
+                        option(value="1000") 1km
+                .col
+                    input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
+            
 
     #map
     script.
@@ -18,16 +28,21 @@ block content
         var geocoder;
         var marker;
         var motobike;
+        let drivers
+        let circle
         var motobike_arr=[]
         var default_position = {lat:10.7666851, lng: 106.641758};
-
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 13,
                 center: default_position,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-            generateMotoBikeLocation(default_position, map ,true)
+            fetchDrivers(null,function(err, drivers){
+                !!err ?
+                console.log(err)
+                :  generateMotoBikeLocation(drivers, map)
+            })
             geocoder = new google.maps.Geocoder();
             document.getElementById('submit').addEventListener('click', function () {
                 clearOverlays();
@@ -46,22 +61,17 @@ block content
                 }
             });
         }
-        function generateMotoBikeLocation(location, map, first){
+        function generateMotoBikeLocation(drivers, map){
             icon = {
                 url: 'https://image.flaticon.com/icons/svg/296/296210.svg',
                 scaledSize: new google.maps.Size(50, 50), 
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(30, 30)
             };
-            let max =10           
-            if(first)
-                max = 100
-            for (let i =0;i< max ;i++){
-                let fix_lat = i % 2 == 0 ? -1 : 1
-                let fix_lng = i % 2 != 0 ? -1 : 1
+            for (let i =0;i< drivers.length ;i++){
                 let pos = {
-                    lat: i*(Math.random())/500 * fix_lat + location.lat,
-                    lng: i*(Math.random())/500 * fix_lng + location.lng
+                    lat:drivers[i].lat,
+                    lng:drivers[i].lng
                 }
                 motobike = new google.maps.Marker({
                     map: map,
@@ -78,6 +88,23 @@ block content
             }
             motobike_arr.length = 0;
         }
+        function circleDrawHandler(pos,map){
+            var radius;
+            radius = $('select#radius').val();
+            circle = new google.maps.Circle({
+                    center:pos,
+                    clickable: true,
+                    draggable: false,
+                    editable: false,
+                    fillColor: '#004de8',
+                    fillOpacity: 0.27,
+                    map: map,
+                    radius: parseInt(radius),
+                    strokeColor: '#004de8',
+                    strokeOpacity: 0.62,
+                    strokeWeight: 1
+                })
+        }
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function (results, status) {
@@ -87,11 +114,15 @@ block content
                         map: resultsMap,
                         position: results[0].geometry.location,
                         draggable: true,
+                        zoom:13
                     });
-                    generateMotoBikeLocation({
-                        lat:results[0].geometry.viewport.f.f,
-                        lng:results[0].geometry.viewport.b.b
-                    }, resultsMap)
+                    circle ? circle.setMap(null) : null
+                    circleDrawHandler(results[0].geometry.location, resultsMap)
+                    fetchDrivers(null,function(err,drivers){
+                            !!err ?
+                            console.log(err)
+                            :  generateMotoBikeLocation(drivers, resultsMap)
+                    })
                     google.maps.event.addListener(marker, 'dragend', function () {
                         geocodePosition(marker.getPosition());
                     });
@@ -109,6 +140,19 @@ block content
                         resultsMap.fitBounds(results[0].geometry.viewport);
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        function fetchDrivers(filter, display){
+            const url = filter?`http://localhost:8080/drivers?filter=${filter}`:"http://localhost:8080/drivers"
+           $.ajax({
+                url: url,
+                dataType: 'json',
+                success:function(result){
+                    return display(null,result)
+                },
+                error:function(xhr,status,err){
+                     return display(err,null)
                 }
             });
         }
