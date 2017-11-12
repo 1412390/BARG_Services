@@ -60,14 +60,14 @@ block content
                 let fix_lat = i % 2 == 0 ? -1 : 1
                 let fix_lng = i % 2 != 0 ? -1 : 1
                 let pos = {
-                    lat: i*(Math.random())/2000 * fix_lat + location.lat,
-                    lng: i*(Math.random())/2000 * fix_lng + location.lng
+                    lat: i*(Math.random())/500 * fix_lat + location.lat,
+                    lng: i*(Math.random())/500 * fix_lng + location.lng
                 }
                 motobike = new google.maps.Marker({
                     map: map,
                     position: pos,
                     icon:icon,
-                    draggable: true
+                    draggable: true,
                 })
                 motobike_arr.push(motobike)
             }
@@ -118,7 +118,6 @@ block content
                 socket.emit("LOCATE");
             });
             socket.on('recieve-data-from-phonis', function (data) {
-                alert(data)
                 $('#address').val(data.address);
                 $('#submit').trigger('click');
                 socket.on('disconnect');
