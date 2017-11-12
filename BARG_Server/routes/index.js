@@ -70,4 +70,15 @@ router.get('/', function (req, res, next) {
     title: 'Express'
   });
 });
+router.get('/drivers',(req,res,next)=>{
+  let filter = req.query.filter
+  const sql = filter ? `select * from drivers where status='${filter}'` : `select * from drivers`
+  db.load(sql)
+  .then(result=>{
+    res.send(result)
+  })
+  .catch(err=>{
+    res.send(err)
+  })
+})
 module.exports = router;
