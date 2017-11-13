@@ -135,16 +135,20 @@ router.post('/get-information', function (req, res, next) {
     );
   });
 });
-router.post('/set-queue-locater', function (req, res, next) {
+router.post('/set-point', function (req, res, next) {
 
   let address = req.body.address,
     type = req.body.type,
-    note = req.body.note;
+    note = req.body.note,
+    status = req.body.status,
+    user_id = req.body.user_id;
 
-  const sql = `INSERT INTO point(address, type, note) VALUES (
+  const sql = `INSERT INTO point(address, type, note, status, user_id) VALUES (
     '${address}',
     ${type},
-    '${note}'
+    '${note}',
+    ${status},
+    ${user_id}    
   )`;
   db.insert(sql).then(
     data => {
@@ -158,29 +162,22 @@ router.post('/set-queue-locater', function (req, res, next) {
     }
   )
 });
-router.get('/get-queue-locater', function (req, res, next) {
+router.post('/get-point-locating', function (req, res, next) {
 
-  const sql = `SELECT* FROM point LIMIT 1`;
+  const user_id = req.body.user_id;
+  const sql = `SELECT* FROM point where user_id = ${user_id} LIMIT 1`;
   db.load(sql).then(
     data => {
       if (data.length > 0) {
-        const sql_pop = `DELETE FROM point WHERE id = ${data[0].id}`;
-        db.load(sql_pop).then(
-          result => {
-            return res.json({
-              success: true,
-              data: data[0]
-            });
-          },
-          err => {
-            console.log(err + "");
-          }
-        );
+        res.json({
+          success: true,
+          point: data[0]
+        });
       }
       else {
         return res.json({
           success: false,
-          data: null
+          point: null
         });
       }
     },
@@ -188,5 +185,51 @@ router.get('/get-queue-locater', function (req, res, next) {
       console.log(err + "");
     }
   )
+});
+
+router.get('/get-point-not-locate', function (req, res, next) {
+  
+    const sql = `SELECT* FROM point where status = -1 LIMIT 1`;
+    db.load(sql).then(
+      data => {
+        if (data.length > 0) {
+          res.json({
+            success: true,
+            point: data[0]
+          });
+        }
+        else {
+          return res.json({
+            success: false,
+            point: null
+          });
+        }
+      },
+      err => {
+        console.log(err + "");
+      }
+    )
+  });
+
+router.post('/set-confirm-locater-locating-point', function (req, res, next) {
+
+  let user_id = req.body.user_id;
+  let point_id = req.body.point_id;
+  let status = req.body.status;
+
+  const sql = `UPDATE point SET status=${status},user_id=${user_id} WHERE id = ${point_id}`;
+  
+  db.load(sql).then(
+    data => {
+      console.log('update successful');
+      res.json({
+        success: true
+      });
+    },
+    err => {
+      console.log(err + "");
+    }
+  )
+
 });
 module.exports = router;
