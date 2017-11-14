@@ -230,6 +230,8 @@ router.post('/switchboard', function(req, res, next){
         address: address, //address get guess
         type: opt_selected,  //type car 0: normal, 1: premium
         note: note, // note
+        user_id: -1,
+        status: -1
     };
     socket.emit("send-data-to-locater", data);
     res.redirect('/users/profile');

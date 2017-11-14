@@ -168,8 +168,27 @@ router.get('/profile', function (req, res, next) {
     if(login){//true
 
         let token = localStorage.getItem('token');
+
+        const data = {
+            token: token
+        };
+
+        let url = config.URL_SERVER + "/users/get-information";
+        axios.post(url, data).then(
+            response => {
+
+                let success = response.data.success;
+                if(success){
+                    let user = response.data.user;
+                    localStorage.setItem('user_id', user.id);
+                    return res.render('users/profile', {status: localStorage.getItem('login')});
+                }
+                else {
+                    console.log(response.data.error);
+                }
+            }
+        ).catch(function () {console.log("");});
         //console.log('token' + token);
-        return res.render('users/profile', {status: localStorage.getItem('login')});
     }
     else {
         return res.redirect('/users/login');
@@ -216,7 +235,9 @@ router.get('/maps', function (req, res ,next) {
     let isLogin = localStorage.getItem('login');
 
     if(isLogin) {//true
-        return res.render('users/maps');
+
+        console.log(localStorage.getItem('user_id'));
+        return res.render('users/maps', {user_id: localStorage.getItem('user_id')});
     }
 
     return res.redirect('/users/login');

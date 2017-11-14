@@ -4,23 +4,26 @@ block content
 
     #floating-panel
         form
-            .row
-                .col
-                    //- label(for='address') Địa chỉ gốc:
-                    input#address.form-control(type='textbox', placeholder="Địa chỉ hiện tại",value="227 Nguyễn Văn Cừ")
-                .col
-                    //- label(for='info') Địa chỉ định vị:
-                    input#info.form-control(type='textbox', placeholder="Địa chỉ mới")
-                .col
-                    //- label(for="radius") Bán kính(m) :
-                    select#radius.form-control
-                        option(value="all") Tất cả
-                        option(value="600") 600m
-                        option(value="800") 800m
-                        option(value="1000") 1km
-                .col
-                    input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
-            
+            .form-group
+                input#hidden(type="hidden", data-socket = "", data-user = '#{user_id}')
+            .form-group
+                label(for='address_root') Địa chỉ gốc:
+                input#address_root.form-control(readonly type='textbox', placeholder="Địa chỉ hiện tại",value="227 Nguyễn Văn Cừ")
+            .form-group
+                img(src="../images/default_geocode-1x.png")
+            .form-group
+                label(for='address') Địa chỉ tìm kiếm:
+                input#address.form-control(type='textbox', placeholder="Nhập địa chỉ...")
+            .form-group
+                label(for="radius") Bán kính(m) :
+                select#radius.form-control
+                    option(value="all") Tất cả
+                    option(value="600") 600m
+                    option(value="800") 800m
+                    option(value="1000") 1km
+            .form-group
+                input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
+
 
     #map
     script.
