@@ -28,9 +28,9 @@ block content
         var geocoder;
         var marker;
         var motobike;
-        let drivers
-        let circle
-        var motobike_arr=[]
+        let drivers;
+        let circle;
+        var motobike_arr=[];
         var default_position = {lat:10.7666851, lng: 106.641758};
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -41,7 +41,10 @@ block content
             fetchDrivers(null,function(err, drivers){
                 !!err ?
                 console.log(err)
-                :  generateMotoBikeLocation(drivers, map)
+                :
+                filterDriversWithRadius(drivers,null,default_position,function(result){
+                    generateMotoBikeLocation(result, map)
+                })
             })
             geocoder = new google.maps.Geocoder();
             document.getElementById('submit').addEventListener('click', function () {
@@ -88,10 +91,12 @@ block content
             }
             motobike_arr.length = 0;
         }
-        function circleDrawHandler(pos,map){
-            var radius;
-            radius = $('select#radius').val();
-            circle = new google.maps.Circle({
+        function circleDrawHandler(pos,map,radius){
+            if(!radius){
+                return null
+            }
+            else {
+                circle = new google.maps.Circle({
                     center:pos,
                     clickable: true,
                     draggable: false,
@@ -104,6 +109,24 @@ block content
                     strokeOpacity: 0.62,
                     strokeWeight: 1
                 })
+            }
+        }
+        function filterDriversWithRadius(drivers,radius,center,callback){
+            const motobikes=[]
+            if(!radius){
+                callback(drivers)
+            }
+            else{
+                for (let i =0;i<drivers.length;i++){
+                    const center = new google.maps.LatLng(default_position)
+                    const drive = new google.maps.LatLng({lat:drivers[i].lat,lng:drivers[i].lng})
+                    let distance = google.maps.geometry.spherical.computeDistanceBetween(drive,center).toFixed(2);
+                    if(distance <= radius){
+                        motobikes.push(drivers[i])
+                    }
+                }
+                return callback(motobikes)
+            }
         }
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
@@ -117,11 +140,17 @@ block content
                         zoom:13
                     });
                     circle ? circle.setMap(null) : null
-                    circleDrawHandler(results[0].geometry.location, resultsMap)
+                    const radius = $('select#radius').val(); 
+                    circleDrawHandler(results[0].geometry.location, resultsMap, radius)
+                    center = new google.maps.LatLng(results[0].geometry.location)
+                    console.log("center:",center)
                     fetchDrivers(null,function(err,drivers){
                             !!err ?
                             console.log(err)
-                            :  generateMotoBikeLocation(drivers, resultsMap)
+                            :  
+                            filterDriversWithRadius(drivers,radius,center,function(result){
+                                generateMotoBikeLocation(result, map)
+                        })
                     })
                     google.maps.event.addListener(marker, 'dragend', function () {
                         geocodePosition(marker.getPosition());
@@ -167,4 +196,4 @@ block content
                 socket.on('disconnect');
             });
         });
-    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7g2FscTKbTHcSpWNvuX6EFWSm81zprQ&callback=initMap')
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDh7g2FscTKbTHcSpWNvuX6EFWSm81zprQ&callback=initMap&libraries=geometry&sensor=false')
