@@ -30,6 +30,7 @@ block content
         var motobike;
         let drivers;
         let circle;
+        let min_dir;
         var motobike_arr=[];
         var default_position = {lat:10.7666851, lng: 106.641758};
         function initMap() {
@@ -127,6 +128,9 @@ block content
                 }
                 return callback(motobikes)
             }
+        }
+        function findMinWay(drivers,map,center){
+            
         }
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
