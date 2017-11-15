@@ -5,7 +5,7 @@ var motobike;
 let drivers
 let min_driver
 let circle
-
+let driver_receive_point
 var motobike_arr = []
 var default_position = {
     lat: 10.7666851,
@@ -94,22 +94,7 @@ function geocodePosition(pos) {
         infowindow.open(map, marker);
     });
 }
-function DrawDirection(start,end){
-    directionsDisplay = new google.maps.DirectionsRenderer;
-    let min = drivers[0].value.routes[0].legs[0].distance.value
-    let index_min=null
-    let next = null
-    for (let i = 1;i < drivers.length-1; i++){
-        next = drivers[i].value.routes[0].legs[0].distance.value
-        if( min > next){
-            index_min = i
-            min = next 
-        }
-    }
-    return directionsDisplay.setDirections(drivers[index_min].value);
-
-}
-function generateMotoBikeLocation(drivers,center,map) {
+function generateMotoBikeLocation(drivers,center,map,directionsDisplay) {
     icon = {
         url: 'https://image.flaticon.com/icons/svg/296/296210.svg',
         scaledSize: new google.maps.Size(50, 50),
@@ -126,6 +111,7 @@ function generateMotoBikeLocation(drivers,center,map) {
         if(min>drivers[i].value){
             min=drivers[i].value
             min_pos = pos
+            driver_receive_point= drivers[i]
         }
         motobike = new google.maps.Marker({
             map: map,
@@ -141,7 +127,9 @@ function generateMotoBikeLocation(drivers,center,map) {
             destination:  center,
             travelMode: 'DRIVING'
           };
+        console.log("driver_receiver",driver_receive_point)
         marker.setMap(null)
+        directionsDisplay.setMap(map)
         directionsService.route(request,function(result,status){
             if (status == 'OK') {
                 directionsDisplay.setDirections(result);
@@ -176,6 +164,7 @@ function circleDrawHandler(pos, map) {
 }
 
 function geocodeAddress(geocoder, resultsMap) {
+    directionsDisplay.setMap(null)    
     var address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
@@ -197,8 +186,7 @@ function geocodeAddress(geocoder, resultsMap) {
                     console.log(err) :
                         filterDriversWithRadius(drivers, radius, results[0].geometry.location,directionsService)
                     .then(result=>{
-                        directionsDisplay.setMap(resultsMap)  
-                        generateMotoBikeLocation(result,results[0].geometry.location, resultsMap)
+                        generateMotoBikeLocation(result,results[0].geometry.location, resultsMap,directionsDisplay)
                     })
             })
             google.maps.event.addListener(marker, 'dragend', function () {
