@@ -1,0 +1,23 @@
+extends layout/layout_2.jade
+
+block content
+
+    form
+        .form-group
+            label(for="sel")
+                | Chọn chế độ xem
+            select#sel(class="form-control")
+                option(value = "-1") Không chọn
+                option(value = "0") Chưa định vị
+                option(value = "1") Đang định vị
+                option(value = "2") Đã định vị
+    table.table.table-hover
+        thead
+            tr
+                th(width="5%") Mã
+                th(width="40%") Địa chỉ
+                th(width="10%") Loại xe
+                th(width="35%") Ghi chú
+                th(width="10%") Tình trạng
+        tbody#tbody
+

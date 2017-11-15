@@ -1,5 +1,988 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html.no-js(lang='vi-VN')
+  head
+    meta(charset='UTF-8')
+    title
+      | Ứng dụng đặt xe: Xe hơi riêng, taxi và xe máy | Grab
+    link(href='//www.google-analytics.com', rel='dns-prefetch')
+    link(href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/images/favicon.ico', rel='shortcut icon')
+    meta(name='msvalidate.01', content='62D708192352CDCE3B73BA9B4A94A95C')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    script(type='text/javascript').
+        window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1044.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/sg/wp-content/themes/grabsg/js/secure-filters.js?ver=1.32110')
+    // <meta name="description" content="">
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    // Google Tag Manager
+    script.
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-54DG5SF');
+    // End Google Tag Manager
+    script.
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:456069,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    meta(name='apple-itunes-app', content='app-id=647268330')
+    script.
+        var stripHtml = (function () {
+            var div = document.createElement('div');
+            return function (html) {
+                var escaped = secureFilters.html(html);
+                return escaped;
+                /*html = decodeURIComponent(html);
+                console.log("HTML", html);
+                div.innerHTML = html.replace(/<\\/?\w+[^>]*\/?>/g, "");
+                return (div.innerText || div.textContent); // textContent is for firefox*/
+            };
+        })();
+        //inject utm_source into cookies
+        function getUrlParams() {
+            var rawQueryString = window.location.search;
+            if (!rawQueryString) {
+                return {};
+            }
+            rawQueryString = rawQueryString.slice(1);
+            var params = {};
+            var splitStrings = rawQueryString.split('&');
+            for (var i = 0, len = splitStrings.length; i < len; i++) {
+                var item = splitStrings[i].split('=');
+                params[item[0]] = stripHtml(decodeURIComponent(item[1]));
+                console.log(item[0], stripHtml(decodeURIComponent(item[1])));
+            }
+            return params;
+        }
+        function setCookie(name, value) {
+            document.cookie = name + "=" + value + "; max-age=300; domain=.grab.com;path=/; secure";
+        }
+        var urlParams = getUrlParams();
+        if (urlParams.utm_source) {setCookie('utm_source', urlParams.utm_source);}
+        if (urlParams.utm_medium) {setCookie('utm_medium', urlParams.utm_medium);}
+        if (urlParams.utm_content) {setCookie('utm_content', urlParams.utm_content);}
+        if (urlParams.utm_term) {setCookie('utm_term', urlParams.utm_term);}
+        if (urlParams.utm_campaign) {setCookie('utm_campaign', urlParams.utm_campaign);}
+    // Schema tag for JSON-LD structured data
+    script(type='application/ld+json').
+      {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name" : "Grab Vietnam",
+      "url"  : "https://www.grab.com/vn/",
+      "logo" : "https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/4/2016/08/Grab_logo.png",
+      "address" : {
+      "@type": "PostalAddress",
+      "addressCountry": "Vietnam",
+      "addressLocality": "Ho Chi Minh City",
+      "addressRegion": "District 10",
+      "postalCode": "700000",
+      "streetAddress": "Công Ty TNHH GrabTaxi - 268 Tô Hiến Thành, P.15, Q.10, TP"
+      },
+      "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+84-8-7108-7108",
+      "contactType": "customer service"
+      }],
+      "email" : "mailto:support.hcm@grab.com",
+      "sameAs" : [
+      "https://www.wikidata.org/wiki/Q20873932",
+      "https://en.wikipedia.org/wiki/Grab_(application)",
+      "https://www.facebook.com/GrabVN/",
+      "https://twitter.com/grabvn",
+      "https://twitter.com/grabtaxivn",
+      "https://www.youtube.com/channel/UC0QKbvP4XKGCw5s4iSXGywQ",
+      "https://www.linkedin.com/company/grabapp",
+      "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger",
+      "https://play.google.com/store/apps/details?id=com.ionicframework.grabshuttle856802",
+      "https://itunes.apple.com/sg/app/grab-car-taxi-bike-booking-app/id647268330",
+      "https://itunes.apple.com/sg/app/grabshuttle/id1205883254"
+      ]
+      }
+    link(rel='alternate', hreflang='en-SG', href='https://www.grab.com/sg/')
+    link(rel='alternate', hreflang='en-MY', href='https://www.grab.com/my/')
+    link(rel='alternate', hreflang='id-ID', href='https://www.grab.com/id/')
+    link(rel='alternate', hreflang='en-ID', href='https://www.grab.com/id/en/')
+    link(rel='alternate', hreflang='th-TH', href='https://www.grab.com/th/')
+    link(rel='alternate', hreflang='en-TH', href='https://www.grab.com/th/en/')
+    link(rel='alternate', hreflang='en-PH', href='https://www.grab.com/ph/')
+    link(rel='alternate', hreflang='en-MM', href='https://www.grab.com/mm/')
+    // - Script ANTS - remarketing
+    script(type='text/javascript', async='', src='//e-vcdn.anthill.vn/delivery-ants/conversion.js')
+    // - end ANTS - remarketing
+    script(type='text/javascript').
+        var ants_analytic = ants_analytic || [];
+        ants_analytic.push({conversionId : "02deeb1a"});
+    // Start The SEO Framework by Sybre Waaijer
+    meta(name='robots', content='noodp,noydir')
+    meta(name='description', content='Grab là cầu nối giữa khách hàng và Đối tác Tài xế. Di chuyển thoải mái với dịch vụ đặt xe hơi riêng, taxi, xe máy nhanh chóng, dễ dàng và an toàn.')
+    meta(property='og:image', content='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/08/cropped-car_banner.jpg')
+    meta(property='og:image:width', content='1334')
+    meta(property='og:image:height', content='700')
+    meta(property='og:locale', content='vi_VN')
+    meta(property='og:type', content='website')
+    meta(property='og:title', content='Ứng dụng đặt xe: Xe hơi riêng, taxi và xe máy | Grab')
+    meta(property='og:description', content='Grab là cầu nối giữa khách hàng và Đối tác Tài xế. Di chuyển thoải mái với dịch vụ đặt xe hơi riêng, taxi, xe máy nhanh chóng, dễ dàng và an toàn.')
+    meta(property='og:url', content='https://www.grab.com/vn/')
+    meta(property='og:site_name', content='Grab VN')
+    meta(property='article:publisher', content='https://www.facebook.com/GrabVN/')
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content='@GrabVN')
+    meta(name='twitter:creator', content='@GrabVN')
+    meta(name='twitter:title', content='Ứng dụng đặt xe: Xe hơi riêng, taxi và xe máy | Grab')
+    meta(name='twitter:description', content='Grab là cầu nối giữa khách hàng và Đối tác Tài xế. Di chuyển thoải mái với dịch vụ đặt xe hơi riêng, taxi, xe máy nhanh chóng, dễ dàng và an toàn.')
+    meta(name='twitter:image', content='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/08/cropped-car_banner.jpg')
+    meta(name='twitter:image:width', content='1334')
+    meta(name='twitter:image:height', content='700')
+    link(rel='canonical', href='https://www.grab.com/vn/')
+    meta(name='google-site-verification', content='r5O-Vrevs9kL6XgG4NYeK1S3f1U1beiNmV0O2Efzb3M')
+    meta(name='msvalidate.01', content='62D708192352CDCE3B73BA9B4A94A95C')
+    // End The SEO Framework by Sybre Waaijer | 0.00463s
+    link(rel='dns-prefetch', href='//www.grab.com')
+    link(rel='dns-prefetch', href='//s.w.org')
+    script(type='text/javascript').
+        window._wpemojiSettings = {"baseUrl":"https:\\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/17225-presscdn-0-73-pagely.netdna-ssl.com\/vn\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.8.3"}};
+        !function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b!==c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+    style(type='text/css').
+      img.wp-smiley,
+      img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 .07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+    link#bootstrap-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/css/bootstrap.min.v3.3.6.css?ver=1.0', media='all')
+    link#common_css-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/css/common.v1.4.4.css?ver=1486894791', media='')
+    link#press_css-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/css/press-stylesheet.v1.4.3.css?ver=1486894791', media='')
+    link#sanomat_css-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/fonts/Sanomat/1512-PNDUFW-11oct17.css?ver=1486894791', media='')
+    link#tablepress-default-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/tablepress/css/default.min.css?ver=1.8.1', media='all')
+    link#wpgform-css-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/wpgform/css/wpgform.css?ver=4.8.3', media='all')
+    link#wpglobus-css(rel='stylesheet', href='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/wpglobus/includes/css/wpglobus.min.css?ver=1.8.9', media='all')
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-includes/js/jquery/jquery.js?ver=1.12.4')
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1')
+    script(type='text/javascript').
+        /* <![CDATA[ */
+        var userSettings = {"url":"\\/","uid":"0","time":"1510280554","secure":"1"};
+        /* ]]> */
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-includes/js/utils.min.js?ver=4.8.3')
+    link(rel='https://api.w.org/', href='https://www.grab.com/vn/wp-json/')
+    link(rel='alternate', type='application/json+oembed', href='https://www.grab.com/vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.grab.com%2Fvn%2F')
+    link(rel='alternate', type='text/xml+oembed', href='https://www.grab.com/vn/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.grab.com%2Fvn%2F&format=xml')
+    style(type='text/css').
+      #section-raw-html-encoded-user-education-body header {display:none}
+    style(type='text/css', media='screen').
+      .wpglobus_flag_vi{background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/wpglobus/flags/vn.png)}
+      .wpglobus_flag_en{background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/wpglobus/flags/us.png)}
+    link(rel='alternate', hreflang='vi-VN', href='https://www.grab.com/vn/')
+    link(rel='alternate', hreflang='en-VN', href='https://www.grab.com/vn/en/')
+    meta(name='google-site-verification', content='r5O-Vrevs9kL6XgG4NYeK1S3f1U1beiNmV0O2Efzb3M')
+  body.home.page-template.page-template-tpl.page-template-tpl-page-sections.page-template-tpltpl-page-sections-php.page.page-id-285.site-id-11
+    // Google Tag Manager (noscript)
+    noscript
+      iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-54DG5SF', height='0', width='0', style='display:none;visibility:hidden')
+    // End Google Tag Manager (noscript)
+    #top
+      .container
+        nav.navbar.navbar-default
+          .navbar-header
+            a.navbar-brand.text-hide.bg-size-cover(href='https://www.grab.com/vn/') Grab Việt Nam
+          ul#nav-main.nav.navbar-nav.hidden-xs
+            li.dropdown.dropdown-large
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Việt Nam
+              ul.dropdown-menu.dropdown-menu-large.row.list-countries(style='position: fixed; top: 60px;')
+                li
+                  a.sg(href='https://www.grab.com/sg')
+                    | Singapore
+                    ul.list-unstyled
+                      li Singapore
+                li
+                  a.my(href='https://www.grab.com/my')
+                    | Malaysia
+                    ul.list-unstyled
+                      li Kuala Lumpur
+                      li Putrajaya
+                      li Johor Bahru
+                      li Pulau Pinang
+                      li Melaka
+                      li Kota Kinabalu
+                      li Kuantan
+                      li Ipoh
+                      li Seremban
+                      li Nilai
+                      li Port Dickson
+                      li Kuching
+                      li Miri
+                      li Langkawi
+                      li Kota Bahru
+                      li Kuala Terengganu
+                      li Sandakan
+                      li Sibu
+                      li Sungai Petani
+                      li Batu Pahat
+                      li Tawau
+                      li Labuan
+                      li Alor Setar
+                      li Kluang
+                      li Kangar
+                      li Bintulu
+                      li Kemaman
+                      li Muar
+                li
+                  a.id(href='https://www.grab.com/id')
+                    | Indonesia
+                    ul.list-unstyled
+                      li Jakarta
+                      li  Bogor
+                      li  Tangerang
+                      li  Bekasi
+                      li  Depok
+                      li  Bandung
+                      li  Cimahi
+                      li  Cirebon
+                      li  Semarang
+                      li  Solo
+                      li  Yogyakarta
+                      li  Magelang
+                      li  Klaten
+                      li  Surabaya
+                      li  Malang
+                      li  Sidoarjo
+                      li  Gresik
+                      li  Mojokerto
+                      li  Batu
+                      li  Denpasar
+                      li  Singaraja
+                      li  Palembang
+                      li  Pekanbaru
+                      li  Lampung
+                      li  Jambi
+                      li  Batam
+                      li  Medan
+                      li  Binjai
+                      li  Deli Serdang
+                      li  Padang
+                      li  Makassar
+                      li  Maros
+                      li  Gowa
+                      li  Balikpapan
+                      li  Banjarmasin
+                      li  Manado
+                      li  Mataram
+                      li  Aceh
+                      li  Bengkulu
+                      li  Karawang
+                      li  Sumedang
+                      li  Indramayu
+                      li  Tasikmalaya
+                      li  Garut
+                      li  Purwakarta
+                      li  Kudus
+                      li  Gunung Kidul
+                      li  Sleman
+                      li  Bantul
+                      li  Kulon Progo
+                      li  Kediri
+                      li  Tabanan
+                      li  Pangkalpinang
+                      li  Samarinda
+                      li  Singkawang
+                      li  Pontianak
+                      li  Palu
+                      li  Pati
+                      li  Demak
+                      li  Pekalongan
+                      li  Serang
+                      li  Subang
+                      li  Batang
+                      li  Sragen
+                      li  Salatiga
+                      li  Boyolali
+                      li  Jepara
+                      li  Rembang
+                      li  Purworejo
+                      li  Kendal
+                      li  Pemalang
+                      li  Jember
+                      li  Cianjur
+                      li  Jayapura
+                      li  Pangandaran
+                      li  Karanganyar
+                      li  Purwokerto
+                      li  Pasuruan
+                      li  Banyuwangi
+                      li  Cilacap
+                      li  Tegal
+                      li  Majalengka
+                      li  Ciamis
+                      li  Purwodadi
+                      li  Lamongan
+                      li  Blitar
+                      li  Tanjung Pandan
+                li
+                  a.th(href='https://www.grab.com/th')
+                    | Thailand
+                    ul.list-unstyled
+                      li Bangkok
+                      li Pattaya
+                      li Chiang Rai
+                      li Chiang Mai
+                      li Phuket
+                      li  Ubon Ratchathani
+                      li  Khon Kaen
+                      li  Nakhon Ratchasima (Korat)
+                      li  Udon Thani
+                      li  Songkhla & Hat Yai
+                      li  Surat Thani & Koh Samui
+                li
+                  a.vn(href='https://www.grab.com/vn')
+                    | Vietnam
+                    ul.list-unstyled
+                      li Ho Chi Minh City
+                      li Ha Noi
+                      li Da Nang
+                      li  Quang Ninh
+                      li  Khanh Hoa
+                li
+                  a.ph(href='https://www.grab.com/ph')
+                    | Philippines
+                    ul.list-unstyled
+                      li Manila
+                      li Cebu
+                      li Davao City
+                      li Iloilo
+                      li Bacolod
+                      li Baguio
+                      li Cagayan de Oro
+                      li Pampanga
+                li
+                  a.mm(href='https://www.grab.com/mm')
+                    | Myanmar
+                    ul.list-unstyled
+                      li Yangon
+            li.dropdown.dropdown-large
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Các dịch vụ
+              ul.dropdown-menu.dropdown-menu-large.row.list-icons(style='position: fixed; top: 60px; ')
+                li.col-sm-offset-1.col-sm-2(style='')
+                  a.icon-taxi(href='https://www.grab.com/vn/taxi/')
+                    | GrabTaxi
+                li.col-sm-2(style='')
+                  a.icon-car(href='https://www.grab.com/vn/car/')
+                    | GrabCar
+                li.col-sm-2(style='')
+                  a.icon-bike(href='https://www.grab.com/vn/bike/')
+                    | GrabBike
+                li.col-sm-2(style='')
+                  a.icon-express(href='https://www.grab.com/vn/express/')
+                    | GrabExpress
+                li.col-sm-2(style='')
+                  a.icon-share(href='https://www.grab.com/vn/share/')
+                    | GrabShare
+            li.dropdown.dropdown-large
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Hợp Tác
+              ul.dropdown-menu.dropdown-menu-large.row.list-icons(style='position: fixed; top: 60px;')
+                li.col-sm-offset-4.col-sm-2
+                  a.icon-work(href='https://www.grab.com/vn/work/') Grab for Work
+                li.col-sm-2
+                  a.icon-partnerships(href='https://www.grab.com/vn/partnerships/') Hợp tác
+          ul.nav.navbar-nav.navbar-right.hidden-xs
+            li
+              span(style='display:none') 11
+              a(href='https://help.grab.com/hc/vi') Hỗ trợ
+            li
+              if (isLogin)
+                a(href='/users/logout', rel='nofollow') Đăng Xuất
+              else
+                a(href='/users/login', rel='nofollow') Đăng Nhập
+            li#menu-item-9999999999.menu-item.menu-item-type-custom.menu-item-object-custom.menu_item_wpglobus_menu_switch.wpglobus-selector-link.wpglobus-current-language.menu-item-9999999999.dropdown
+              a.dropdown-toggle(title='<span class="wpglobus_language_full_name">Tiếng Việt</span>', href='#', data-toggle='dropdown', aria-haspopup='true')
+                span.wpglobus_language_full_name Tiếng Việt
+              ul.dropdown-menu(role='menu')
+                li#menu-item-wpglobus_menu_switch_en.menu-item.menu-item-type-custom.menu-item-object-custom.sub_menu_item_wpglobus_menu_switch.wpglobus-selector-link.menu-item-wpglobus_menu_switch_en
+                  a(title='<span class="wpglobus_language_full_name">English</span>', href='https://www.grab.com/vn/en/')
+                    span.wpglobus_language_full_name English
+          ul#nav-drive.nav.navbar-nav.navbar-right.hidden-xs
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Trở thành tài xế
+              ul.dropdown-menu.list-icons
+                li.abc(style='')
+                  a.icon-drive-white(href='https://www.grab.com/vn/driver/', style='')
+                    | Trở thành tài xế
+                li.abc(style='')
+                  a.icon-car-drive-white(href='https://www.grab.com/vn/driver/grabcar/', style='')
+                    | Đăng ký chủ xe GrabCar
+                li.abc(style='')
+                  a.icon-taxi-drive-white(href='https://www.grab.com/vn/driver/taxi/', style='')
+                    | Làm tài xế GrabTaxi
+                li.abc(style='')
+                  a.icon-bike-drive-white(href='https://www.grab.com/vn/driver/bike/', style='')
+                    | Đối tác GrabBike | GrabExpress
+        a#cd-menu-trigger.visible-xs(href='#0')
+          span.cd-menu-text Menu
+          span.cd-menu-icon
+        a#btn-download.visible-xs.btn.btn-green.weight-bold.outline.text-caps(href='https://www.grab.com/vn/driver') Driver Sign-Up
+      // /container
+    nav#cd-lateral-nav.visible-xs
+      .inner
+        a.btn.btn-green.btn-block.weight-bold.outline(href='https://hub.grab.com/', target='_blank', rel='nofollow') Đăng Nhập
+      ul#menu-main-navigation.cd-navigation.list-unstyled
+        li.menu-item-has-children.menu-item-drive
+          a(href='#') Trở thành tài xế
+          ul#sub-menu-drive.sub-menu.list-unstyled.list-icons
+            li.link-
+              a.icon-drive(href='https://www.grab.com/vn/driver/') Trở thành tài xế
+            li.link-
+              a.icon-car-drive(href='https://www.grab.com/vn/driver/grabcar/') Đăng ký chủ xe GrabCar
+            li.link-
+              a.icon-taxi-drive(href='https://www.grab.com/vn/driver/taxi/') Làm tài xế GrabTaxi
+            li.link-
+              a.icon-bike-drive(href='https://www.grab.com/vn/driver/bike/') Đối tác GrabBike | GrabExpress
+        li.menu-item-has-children
+          a(href='#') Các dịch vụ
+          ul.sub-menu.list-unstyled.list-icons
+            li
+              a.icon-taxi(href='https://www.grab.com/vn/taxi/') Taxi
+            li
+              a.icon-car(href='https://www.grab.com/vn/car/') Car
+            li
+              a.icon-bike(href='https://www.grab.com/vn/bike/') Bike
+            li
+              a.icon-express(href='https://www.grab.com/vn/express/') Express
+            li
+              a.icon-share(href='https://www.grab.com/vn/share/') Share
+        li.menu-item-has-children
+          a(href='#') Doanh Nghiệp
+          ul.sub-menu.list-unstyled.list-icons
+            li
+              a.icon-work(href='https://www.grab.com/vn/work/') Grab for Work
+            li
+              a.icon-partnerships(href='https://www.grab.com/vn/partnerships/') Hợp tác
+        li
+          a(href='https://www.grab.com/vn/about/') Về chúng tôi
+        li
+        li.menu-item
+          a(href='https://www.grab.com/vn/blog/') Blog
+        li
+          a(href='https://www.grab.com/vn/press/') Grab trên mặt báo
+        li
+          a(href='https://grab.careers/', target='_blank') Tuyển dụng
+        li
+          a(href='https://www.grab.com/vn/safety/') Safety
+        li
+          a(href='https://help.grab.com/hc/vi') Hỗ trợ
+        li.menu-item-has-children
+          a(href='#') Việt Nam
+          ul.sub-menu.list-unstyled.list-countries
+            li
+              a.sg(href='https://www.grab.com/sg') Singapore
+            li
+              a.my(href='https://www.grab.com/my') Malaysia
+            li
+              a.id(href='https://www.grab.com/id') Indonesia
+            li
+              a.th(href='https://www.grab.com/th') Thailand
+            li
+              a.vn(href='https://www.grab.com/vn') Vietnam
+            li
+              a.ph(href='https://www.grab.com/ph') Philippines
+            li
+              a.mm(href='https://www.grab.com/mm') Myanmar
+        li.menu-item.menu-item-type-custom.menu-item-object-custom.menu_item_wpglobus_menu_switch.wpglobus-selector-link.wpglobus-current-language.menu-item-9999999999.menu-item-has-children
+          a(href='https://www.grab.com/vn/')
+            span.wpglobus_language_full_name Tiếng Việt
+          ul.sub-menu
+            li.menu-item.menu-item-type-custom.menu-item-object-custom.sub_menu_item_wpglobus_menu_switch.wpglobus-selector-link.menu-item-wpglobus_menu_switch_en
+              a(href='https://www.grab.com/vn/en/')
+                span.wpglobus_language_full_name English
+    .wrapper
+      main(role='main')
+        section#section-carousel-homepage-carousel.section.section-carousel.section--dark
+          #carousel-homepage-carousel.carousel.slide(data-ride='carousel')
+            ol.carousel-indicators
+              li.active(data-slide-to='0', data-target='#carousel-homepage-carousel')
+              li(data-slide-to='1', data-target='#carousel-homepage-carousel')
+              li(data-slide-to='2', data-target='#carousel-homepage-carousel')
+              li(data-slide-to='3', data-target='#carousel-homepage-carousel')
+            .carousel-inner(role='listbox')
+              .bg-size-cover.item.active(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/01_hero_banner.jpg);')
+                .carousel-caption
+                  h1 GrabTaxi. GrabCar. GrabBike. GrabExpress.
+                  p Trên cùng một ứng dụng.
+                  a.btn.btn-lg.btn-green.text-caps.weight-bold(href='https://www.grab.com/vn/download/') TẢI NGAY!
+              .bg-size-cover.item(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/hero-grabrewards.jpg);')
+                .carousel-caption
+                  h1 Khám phá ưu đãi hấp dẫntừ GrabRewards!
+                  p
+                  a.btn.btn-lg.btn-green.text-caps.weight-bold(href='https://www.grab.com/vn/grabrewards-catalogue/') EXPLORE GRABREWARDS CATALOGUE
+              .bg-size-cover.item(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/driver.jpg);')
+                .carousel-caption
+                  h1 TĂNG THU NHẬP. THÊM KẾT NỐI.
+                  p Trở thành đối tác của Grab để làm chủ cuộc sống của mình tốt hơn.
+                  a.btn.btn-lg.btn-green.text-caps.weight-bold(href='http://www.grab.com/vn/driver/') Đăng ký ngay
+              .bg-size-cover.item(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/02_hero_banner.jpg);')
+                .carousel-caption
+                  h1 Hơn 11 triệu người dùng. 200 nghìn tài xế. Đã thoải mái khi di chuyển.
+                  p
+                  a.btn.btn-lg.btn-green.text-caps.weight-bold(href='https://www.grab.com/vn/about/') TÌM HIỂU THÊM
+            // /carousel-inner
+          // /carousel
+        section#section-guide-how-it-works-grabtaxi.section.section--light.section-guide(style='												padding-top: 50px;padding-bottom: 0px;')
+          .container
+            header
+              h2 Những tính năng nổi bật của Grab?
+              p Dễ dàng đi mọi nơi cùng Grab
+            .row
+              .col-xs-12.col-md-10.col-md-offset-1
+                #carousel--mobileview--how-it-works-grabtaxi.carousel.carousel--mobileview.carousel-fade.slide.clearfix(data-ride='carousel')
+                  // Indicators
+                  ol.carousel-indicators.steps--4.clearfix
+                    li.active(data-slide-to='0', data-target='#carousel--mobileview--how-it-works-grabtaxi', data-step='1')
+                      h4 Đặt xe chỉ với 2 thao tác đơn giản
+                      p
+                        | Đừng quên chọn điểm đến của bạn để nhận thông báo ước lượng về giá cước cho chuyến đi.
+                    li(data-slide-to='1', data-target='#carousel--mobileview--how-it-works-grabtaxi', data-step='2')
+                      h4 Tài xế đón liền tay!
+                      p Grab sẽ giúp bạn tìm tài xế (có xe trống) gần nhất.
+                    li(data-slide-to='2', data-target='#carousel--mobileview--how-it-works-grabtaxi', data-step='3')
+                      h4 Dõi theo tài xế
+                      p
+                        | Bạn có thể dõi theo di chuyển của tài xế và biết trước thời điểm bạn sẽ được ngồi lên xe!
+                    li(data-slide-to='3', data-target='#carousel--mobileview--how-it-works-grabtaxi', data-step='4')
+                      h4 Kết thúc hành trình an toàn mỹ mãn
+                      p
+                        | Bạn thậm chí còn có thể chia sẻ hành trình của mình với người thân để thêm phần an tâm trong chuyến đi nha!
+                  // Wrapper for slides
+                  .carousel-description.visible-xs
+                  .carousel-inner
+                    .item.active
+                      img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/1_step-1.jpg')
+                    // /item
+                    .item
+                      img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/2_step-1.jpg')
+                    // /item
+                    .item
+                      img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/3_step-1.jpg')
+                    // /item
+                    .item
+                      img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/4_step-1.jpg')
+                    // /item
+                  // /carousel-inner
+                  .carousel-bg
+                // /carousel
+            // /row
+          // /container
+        div(style='display:none') raw-html-encoded
+        section#section-raw-html-encoded-user-education-body.section.section--light.section-raw-html-encoded.bg-size-cover(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/04/dg-dl-grab-back.jpg);												padding-top: 0px;padding-bottom: 0px;')
+          .container-fluid
+            header
+            style.
+              .step1 .fluid-container {padding-top:90px; padding-bottom:85px}
+              .step1 h2 {font-weight: 600; font-size: 2.571em; color: #fff; text-align: center; width:100%; max-width:620px;margin-left:auto; margin-right:auto; margin-bottom:50px; padding-left:15px; padding-right:15px;}
+              .step1 .btn {background-color:#fff; color:#00b040; text-transform:uppercase; border-radius: 0; box-shadow: none; padding: 16px 20px 15px; font-size: 1.35em; line-height: 1;}
+            .step1
+              .row
+                .fluid-container.text-center(style='background-color:#009d3b')
+                  h2 Những điều bạn cần biết cho chuyến Grab đầu tiên
+                  a.btn.btnNext(href='https://www.grab.com/vn/rideguide/') TÌM HIỂU THÊM
+          // /container
+        section#section-carousel-tooltip-homepage-services.section.section-carousel-tooltip.section--dark
+          header
+            h2 TỰ DO LỰA CHỌN
+            p Grab mang đến những dịch vụ vận chuyển tối ưu cho mọi nhu cầu di chuyển của bạn
+          #carousel-homepage-services.carousel.carousel-tooltip.carousel-fade.slide(data-ride='carousel')
+            ol.carousel-indicators
+              li.active(data-slide-to='0', data-target='#carousel-homepage-services')
+                i.icon.icon--hover.icon--service--taxi
+              li(data-slide-to='1', data-target='#carousel-homepage-services')
+                i.icon.icon--hover.icon--service--car
+              li(data-slide-to='2', data-target='#carousel-homepage-services')
+                i.icon.icon--hover.icon--service--bike
+              li(data-slide-to='3', data-target='#carousel-homepage-services')
+                i.icon.icon--hover.icon--service--express
+            .carousel-inner(role='listbox')
+              .item.item-1.bg-size-cover.active(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/taxi-2-2.jpg);')
+                .carousel-caption
+                  h1 GrabTaxi
+                  p
+                    | Dịch vụ đi lại sử dụng xe taxi của các hãng uy tín, báo trước ước lượng giá cước và nắm rõ thông tin tài xế. Di chuyển bằng taxi an tâm và thoải mái hơn bao giờ!
+                  a(href='/vn/taxi/')
+                    span
+              .item.item-2.bg-size-cover(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/car-2-2.jpg);')
+                .carousel-caption
+                  h1 GrabCar
+                  p
+                    | An toàn, thuận tiện, sang trọng và thoải mái, GrabCar đồng hành với thế hệ những người tự tin làm chủ cuộc sống, bắt đầu từ cách di chuyển!
+                  a(href='/vn/car/')
+                    span
+              .item.item-3.bg-size-cover(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/bike-2-2.jpg);')
+                .carousel-caption
+                  h1 GrabBike
+                  p
+                    | Chiếc xe ôm quen thuộc giờ khoác lên mình chiếc áo mới, hiện đại và đáng tin cậy. GrabBike là dịch vụ đi lại năng động và thú vị nhất!
+                  a(href='/vn/bike/')
+                    span
+              .item.item-4.bg-size-cover(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/express-2-2.jpg);')
+                .carousel-caption
+                  h1 GrabExpress
+                  p
+                    | Giúp bạn chuyển hàng tới bất cứ đâu trong thành phố ngay lập tức: nhận tận tay và trao tận cửa! Hiện đại, nhanh nhẹn và đầy tin cậy!
+                  a(href='/vn/express/')
+                    span
+            // /carousel-inner
+          // /carousel
+        section#section-download-download-app.section.section--padded.section--dark.section-download.bg-size-cover(style='background-image: url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/04/dg-dl-grab-back.jpg);												')
+          .container
+            header
+              h2 Tải ứng dụng Grab
+            .dl--well.clearfix.center-block
+              .dl--qr-code
+                span.weight-bold.block.bottom-margin-sm Quét mã QR
+                img.img-responsive.img--qr-code(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/pax_vn.jpg')
+              // /dl--qr-code
+              .dl--stores
+                a.bottom-margin-sm(href='https://app.appsflyer.com/id647268330?pid=VN-Website-IOS-Install_Button&c=Website_Download', onclick="ga('send', { hitType: 'event', eventCategory: 'Website', eventAction: 'Download',  eventLabel: 'Web'});", target='_blank')
+                  img.img-responsive(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/app-store.png')
+                a.bottom-margin-sm(href='https://app.appsflyer.com/com.grabtaxi.passenger?pid=VN-Website-ADR-Install_Button&c=Website_Download', onclick="ga('send', { hitType: 'event', eventCategory: 'Website', eventAction: 'Download',  eventLabel: 'Web'});", target='_blank')
+                  img.img-responsive(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/05/google-play.png')
+              // /dl--stores
+            // /dl--well
+            //
+              <div class="row visible-xs text-center row-mobile">
+              <a class="btn btn-green btn-lg weight-bold" href="https://www.grab.com/sg/download" onclick="ga('send', { hitType: 'event', eventCategory: 'Website', eventAction: 'Download', eventLabel: 'Web'});">DOWNLOAD NOW</a>
+              </div><!-- /row-mobile
+          // /container
+        // /section
+        section#section-latest-news.section.section-grid-news.section--light.section--padded
+          .container
+            header
+              h2 TIN TỨC MỚI NHẤT
+              p Khám phá thế giới của Grab tại đây
+            .row
+              .col-xs-12.col-sm-12.col-md-8.latest
+                .box.bg-size-cover.bottom-margin-md(style='background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2017/11/1BILLIONRIDES.png);')
+                  .blurb
+                    span.date.block November 6, 2017
+                    span.weight-bold Grab chính thức cán mốc 1 tỷ chuyến xe
+                  .excerpt
+                    .centered-wrapper
+                      .centered
+                        p
+                          | Singapore, ngày 6 tháng 11 năm 2017 — Grab, ứng dụng đặt xe công nghệ và thanh toán di động […]
+                        a(rel='bookmark', href='https://www.grab.com/vn/press/business/grab-chinh-thuc-can-moc-1-ty-chuyen-xe/', title='Grab chính thức cán mốc 1 tỷ chuyến xe') Know More
+                // /box
+              .col-xs-12.col-sm-6.col-md-4
+                .box.bg-size-cover.bottom-margin-md(style='background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2017/10/GrabxSQ-InApp_ConfirmEntry1125x420-VN.png);')
+                  .blurb
+                    span.date.block October 3, 2017
+                    span.weight-bold HÃNG HÀNG KHÔNG SINGAPORE AIRLINES VÀ GRAB ĐẠT THỎA THUẬN HỢP TÁC MỞ RỘNG
+                  .excerpt
+                    .centered-wrapper
+                      .centered
+                        li
+                          em
+                            | Khách hàng của Singapore Airlines (SIA) có thể đặt chuyến xe Grab ngay trên ứng dụng SingaporeAir.
+                        li
+                          em
+                            | Thành viên GrabRewards có thể đổi điểm thưởng sang dặm bay KrisFlyer từ tháng 10/2017.
+                        a(rel='bookmark', href='https://www.grab.com/vn/press/business/hang-hang-khong-singapore-airlines-va-grab-dat-thoa-thuan-hop-tac-mo-rong/', title='HÃNG HÀNG KHÔNG SINGAPORE AIRLINES VÀ GRAB ĐẠT THỎA THUẬN HỢP TÁC MỞ RỘNG') Know More
+                // /box
+              .col-xs-12.col-sm-6.col-md-4
+                .box.bg-size-cover.bottom-margin-md(style='background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2017/10/Grab_MidAutumn2017.jpg);')
+                  .blurb
+                    span.date.block
+                    span.weight-bold GRAB TỔ CHỨC NGÀY HỘI “TRUNG THU CÙNG GRAB – ẤM ÁP YÊU THƯƠNG”
+                  .excerpt
+                    .centered-wrapper
+                      .centered
+                        li
+                          em
+                            | Tổ chức các hoạt động vui Tết Trung thu và trao tặng quà, học bổng cho các em nhỏ hoàn cảnh khó khăn tại 3 thành phố Hà Nội, TP.HCM và Đà Nẵng với tổng giá trị tài trợ gần 140 triệu đồng.
+                        li
+                          em
+                            | Là một phần trong chuỗi dự án từ thiện “Hành trình yêu thương” nhằm hỗ trợ cộng đồng.
+                        a(rel='bookmark', href='https://www.grab.com/vn/press/social-impact-safety/grab-to-chuc-ngay-hoi-trung-thu-cung-grab-am-ap-yeu-thuong/', title='GRAB TỔ CHỨC NGÀY HỘI “TRUNG THU CÙNG GRAB – ẤM ÁP YÊU THƯƠNG”') Know More
+                // /box
+              .col-xs-12.col-sm-6.col-md-4
+                .box.bg-size-cover.bottom-margin-md(style='background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2017/09/GC_KhanhHoa02_Blog-1.jpg);')
+                  .blurb
+                    span.date.block September 19, 2017
+                    span.weight-bold GRAB MỞ RỘNG HỢP TÁC, GÓP PHẦN NÂNG CAO HIỆU QUẢ DỊCH VỤ TAXI TẠI TỈNH KHÁNH HÒA
+                  .excerpt
+                    .centered-wrapper
+                      .centered
+                        li
+                          em
+                            | Khẳng định vị trí hàng đầu của Grab tại Việt Nam trong việc ứng dụng công nghệ vào lĩnh vực giao thông vận tải.
+                        li
+                          em
+                            | Là ứng dụng sàn giao dịch thương mại điện tử được đăng ký và hoạt động hợp pháp đầu tiên có mặt tại Khánh Hòa.
+                        li
+                          em
+                            | Là minh chứng cho cam kết vững chắc của Grab về việc luôn sát cánh và hợp tác với đối tác vận tải taxi.
+                        a(rel='bookmark', href='https://www.grab.com/vn/press/business/grab-mo-rong-hop-tac-gop-phan-nang-cao-hieu-qua-dich-vu-taxi-tai-tinh-khanh-hoa/', title='GRAB MỞ RỘNG HỢP TÁC, GÓP PHẦN NÂNG CAO HIỆU QUẢ DỊCH VỤ TAXI TẠI TỈNH KHÁNH HÒA') Know More
+                // /box
+              .col-xs-12.col-sm-6.col-md-4
+                .box.bg-size-cover.bottom-margin-md(style='background-image:url(https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2017/08/GC_QuangNinh02_Blog-1.jpg);')
+                  .blurb
+                    span.date.block August 23, 2017
+                    span.weight-bold GRAB CHÍNH THỨC TRIỂN KHAI DỊCH VỤ GRABCAR VÀ GRABTAXI TẠI QUẢNG NINH
+                  .excerpt
+                    .centered-wrapper
+                      .centered
+                        li
+                          em
+                            | Mang lựa chọn di chuyển thuận tiện, an toàn và tiết kiệm đến với người dân Quảng Ninh và du khách.
+                        li
+                          em
+                            | Với việc mở rộng ra Quảng Ninh, dịch vụ của Grab chính thức có mặt tại 4 thành phố ở Việt Nam, củng cố vị trí dẫn dầu của Grab với mạng lưới dịch vụ đặt xe công nghệ lớn nhất cả nước.
+                        li
+                          em
+                            | Là minh chứng cho cam kết của Grab trong việc đáp ứng nhu cầu di chuyển bằng các chuyến xe công nghệ ngày càng tăng cao tại Việt Nam cũng như góp phần cải thiện cuộc sống của người dân.
+                        a(rel='bookmark', href='https://www.grab.com/vn/press/business/grab-chinh-thuc-trien-khai-dich-vu-grabcar-va-grabtaxi-tai-quang-ninh/', title='GRAB CHÍNH THỨC TRIỂN KHAI DỊCH VỤ GRABCAR VÀ GRABTAXI TẠI QUẢNG NINH') Know More
+                // /box
+            // /row
+            .row
+              .col-sm-2.col-sm-offset-5
+                a.btn.btn-block.btn-primary.weight-bold(href='https://www.grab.com/vn/press/') View More
+          // /container
+      section.sitemap
+        .container
+          .row
+            .footer-secTop
+              .col-sm-12.col-md-3
+                .footer-about-grab
+                  .grab-logo.bottom-margin-md
+                    a(href='https://www.grab.com/vn/')
+                      img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/images/grab-white.png')
+                  .grab-infor
+                    p
+                      | Công Ty TNHH GrabTaxi - 268 Tô Hiến Thành, P.15, Q.10, TP Hồ Chí Minh
+                      br
+                      | Mã số doanh nghiệp: 0312650437
+                      br
+                      | Đại Diện Công Ty: Lim Yen Hock
+                      br
+                      | Chức vụ: Giám Đốc
+                  .grab-contact.top-margin-md
+                    p
+                    p
+                      a(href='mailto:')
+                // /footer-about-grab
+              // /col-sm-12 col-md-3
+              .col-sm-12.col-md-9.hidden-xs
+                .row.sitemap-container
+                  .col-xs-6.col-sm-4.col-md-3
+                    h4.text-caps CÔNG TY
+                    ul#menu-company-menu.sitemapList
+                      li#menu-item-1040.menu-item
+                        a(href='https://www.grab.com/vn/about/') Về chúng tôi
+                      li#menu-item-1047.menu-item
+                        a(href='https://www.grab.com/vn/press/') Grab trên mặt báo
+                      li.menu-item
+                        a(href='https://www.grab.com/vn/blog/') Blog
+                      li#menu-item-1039.menu-item
+                        a(href='https://grab.careers', target='_blank') Tuyển dụng
+                  // /col-xs-6 col-sm-4 col-md-3
+                  .col-xs-6.col-sm-4.col-md-3
+                    h4.text-caps Các dịch vụ
+                    ul#menu-footer-services.sitemapList
+                      li#menu-item-375.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-375
+                        a(href='https://www.grab.com/vn/taxi/') GrabTaxi
+                      li#menu-item-376.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-376
+                        a(href='https://www.grab.com/vn/car/') GrabCar
+                      li#menu-item-4007.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-4007
+                        a(href='https://www.grab.com/vn/bike/') GrabBike
+                      li#menu-item-4008.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-4008
+                        a(href='https://www.grab.com/vn/express/') GrabExpress
+                      li#menu-item-10121.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-10121
+                        a(href='https://www.grab.com/vn/share/') GrabShare
+                  // /col-xs-6 col-sm-4 col-md-3
+                  .col-xs-6.col-sm-4.col-md-3
+                    h4.text-caps Doanh Nghiệp
+                    ul#menu-footer-corporate.sitemapList
+                      li#menu-item-380.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-380
+                        a(href='https://www.grab.com/vn/work/') Grab for Work
+                      li#menu-item-381.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-381
+                        a(href='https://www.grab.com/vn/partnerships/') Cơ hội hợp tác
+                  // /col-xs-6 col-sm-4 col-md-3
+                  .col-xs-6.col-sm-4.col-md-3
+                    h4.text-caps CHUYẾN ĐI
+                    ul#menu-footer-ride.sitemapList
+                      li#menu-item-387.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-387
+                        a(href='https://www.grab.com/vn/driver/') Lái xe cùng Grab
+                      li#menu-item-7703.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-7703
+                        a(href='https://www.grab.com/vn/safety/') An toàn
+                      li#menu-item-13599.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-13599
+                        a(href='https://help.grab.com/hc/vi') Hỗ trợ
+                  // /col-xs-6 col-sm-4 col-md-3
+                // /row sitemap-container
+                .row
+                  .col-sm-3.col-md-offset-9
+                    div(style='margin-top: 25px;')
+                      a(href='http://online.gov.vn/HomePage/AppDisplay.aspx?DocId=81', target='_blank')
+                        img(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/uploads/sites/11/2016/08/20150827110756-dadangky.png', style='max-width: 150px;')
+              // /col-sm-12 col-md-9
+              .col-sm-12.col-md-12.hidden-xs
+                hr
+            // /footer-secTop
+          // /row
+          .row
+            .col-sm-6.col-md-3.socialArea
+              .row.hidden-xs
+                .col-xs-12
+                  h4.text-caps HÃY LIÊN LẠC THƯỜNG XUYÊN NHÉ
+              // /row
+              .row
+                .col-xs-3.col-xs-push-2.col-md-4.col-md-push-0
+                  a.fb.socialIcon.hvr-float-shadow(target='_blank', href='https://www.facebook.com/grabvn')
+                    i.fa.fa-facebook.fa-2x
+                .col-xs-3.col-xs-push-2.col-md-4.col-md-push-0
+                  a.instagram.socialIcon.hvr-float-shadow(target='_blank', href='https://www.instagram.com/grabvn/')
+                    i.fa.fa-instagram.fa-2x
+                .col-xs-3.col-xs-push-2.col-md-4.col-md-push-0
+                  a.twitter.socialIcon.hvr-float-shadow(target='_blank', href='https://twitter.com/grabvn')
+                    i.fa.fa-twitter.fa-2x
+              // /row
+            // /col-sm-6 col-md-2 socialArea
+          // /row
+        // /container
+      // /sitemap
+      footer
+        .container
+          .row
+            .col-xs-12.col-md-4
+              ul.policylist
+                li
+                  a(href='https://www.grab.com/vn/terms/') Quy chế hoạt động và Điều khoản sử dụng
+                li
+                  a(href='https://www.grab.com/vn/privacy/') Chính sách bảo mật
+            // /col-xs-12 col-md-4
+            .col-xs-12.col-md-4
+              p.copyright © Grab 2017
+            .col-xs-12.col-md-4.hidden-xs
+              ul.playstore
+                li
+                  a(onclick="ga('send', { hitType: 'event', eventCategory: 'Website', eventAction: 'Download',  eventLabel: 'Web'});", target='_blank', href='https://app.appsflyer.com/id647268330?pid=VN-Website-IOS-Install_Button&c=Website_Download')
+                    img.img-responsive(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/images/footer/app-store.png')
+                li
+                  a(onclick="ga('send', { hitType: 'event', eventCategory: 'Website', eventAction: 'Download',  eventLabel: 'Web'});", target='_blank', href='https://app.appsflyer.com/com.grabtaxi.passenger?pid=VN-Website-ADR-Install_Button&c=Website_Download')
+                    img.img-responsive(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/images/footer/google-play.png')
+            // /col-xs-12 col-md-4
+          // /row
+        // /container
+      // /footer
+    // /wrapper
+    // jQuery
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/bootstrap.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/push/kitUtils.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/push/fastclick.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/detectmobilebrowser.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/jquery.dataTables.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/dataTables.responsive.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/jquery.validate.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/slick.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/masonry.pkgd.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/imagesloaded.pkgd.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/jquery.flip.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/main.js?20170301')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/bootstrap-datepicker.min.js')
+    script(src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/themes/grabsg/js/bootstrap-datepicker.vi.min.js')
+    script.
+        $(".btn-download").click(function(event){
+            event.preventDefault();
+            if($.browser.mobile){
+                var isiPad = /ipad/i.test(navigator.userAgent.toLowerCase());
+                var isiPhone = /iphone/i.test(navigator.userAgent.toLowerCase());
+                var isiPod = /ipod/i.test(navigator.userAgent.toLowerCase());
+                var isAndroid = /android/i.test(navigator.userAgent.toLowerCase());
+                var isiDevice = /ipad|iphone|ipod/i.test(navigator.userAgent.toLowerCase());
+                var isBlackBerry = /blackberry/i.test(navigator.userAgent.toLowerCase());
+                var isWebOS = /webos/i.test(navigator.userAgent.toLowerCase());
+                var isWindowsPhone = /windows phone/i.test(navigator.userAgent.toLowerCase());
+                if($(this).hasClass("driver")){
+                    if(isiDevice){window.location.href = "/vn/download/driver/";}
+                    if (isAndroid){window.location.href = "https://play.google.com/store/apps/details?id=com.grabtaxi.driver2";}
+                    if (isBlackBerry){window.location.href = "/vn/download/driver/";}
+                    if (isWebOS){window.location.href = "/vn/download/driver/";}
+                    if (isWindowsPhone){window.location.href = "/vn/download/driver/";}
+                }else{
+                    if(isiDevice){window.location.href = "https://app.appsflyer.com/id647268330?pid=VN-Website-IOS-Install_Button&c=Website_Download";}
+                    if (isAndroid){window.location.href = "https://app.appsflyer.com/com.grabtaxi.passenger?pid=VN-Website-ADR-Install_Button&c=Website_Download";}
+                    if (isBlackBerry){window.location.href = "https://appworld.blackberry.com/webstore/content/44169887";}
+                    if (isWebOS){window.location.href = "/vn/download/";}
+                    if (isWindowsPhone){window.location.href = "/vn/download/";}
+                }
+            }
+            else{
+                if($(this).hasClass("driver")){window.location.href = "/vn/download/driver/";}
+                else{window.location.href = "/vn/download/";}
+            }
+        });
+    script.
+        $(".innerLink").click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: $(".goHere").offset().top
+            }, 1500);
+        });
+        $(".section-carousel .carousel .item").css("height" , $(window).height() * 0.70);
+        if($(".driverBanner .floatForm").length){
+            var floatFormHeight = $(".driverBanner .floatForm").offset().top + $(".driverBanner .floatForm").innerHeight();
+            var dBannerHeight = $(".driverBanner").height();
+            if((floatFormHeight - dBannerHeight) > 8){
+                var newHeight =  floatFormHeight - 8;
+                var percentage = ($(window).height() - newHeight)/100;
+                percentage = percentage.toFixed(2);
+                $(".driverBanner").css("height" , newHeight);
+            }
+        }
+        if($(window).width() <= 768 ){
+            $(".driverBanner").css("height" , ($(window).height() * 0.85) +  $(".driverBanner .floatForm").height() );
+            $(".section-carousel .carousel .item").css("height" , ($(window).height() * 0.85));
+        }
+        FastClick.attach(document.body);
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/ithemes-security-pro/core/modules/wordpress-tweaks/js/blankshield/blankshield.min.js?ver=4078')
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/ithemes-security-pro/core/modules/wordpress-tweaks/js/block-tabnapping.js?ver=4078')
+    script(type='text/javascript').
+        /* <![CDATA[ */
+        var WPGlobus = {"version":"1.8.9","language":"vi","enabledLanguages":["vi","en"]};
+        /* ]]> */
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-content/plugins/wpglobus/includes/js/wpglobus.min.js?ver=1.8.9')
+    script(type='text/javascript', src='https://17225-presscdn-0-73-pagely.netdna-ssl.com/vn/wp-includes/js/wp-embed.min.js?ver=4.8.3')
+    // Eloqua Code
+    script(type='text/javascript').
+        var _elqQ = _elqQ || [];
+        _elqQ.push(['elqSetSiteId', '629252191']);
+        _elqQ.push(['elqTrackPageView']);
+        (function () {
+            function async_load() {
+                var s = document.createElement('script'); s.type = 'text/javascript';
+                s.async = true; s.src = '//img.en25.com/i/elqCfg.min.js';
+                var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore (s, x);
+            }
+            if (window.addEventListener) window.addEventListener('DOMContentLoaded',
+                async_load, false);
+            else if (window.attachEvent) window.attachEvent('onload', async_load);
+        })();
+    // End Eloqua Code
+    script(type='text/javascript').
+        window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"8267985d0f","applicationID":"75909284","transactionName":"blQHYBdUCEUEB0FcDlceJFcRXAlYShBFWUxJUAJRSEYDVRENWlsS","queueTime":0,"applicationTime":509,"atts":"QhMEFl9OG0s=","errorBeacon":"bam.nr-data.net","agent":""}

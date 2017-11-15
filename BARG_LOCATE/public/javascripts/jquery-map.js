@@ -1,19 +1,19 @@
-let promise =require("bluebird")
-var map;
-var geocoder;
-var marker;
-var motobike;
+//let promise =require("bluebird")
+let map;
+let geocoder;
+let marker;
+let motobike;
 let drivers
 let min_driver
 let circle
-var motobike_arr = []
-var default_position = {
+let motobike_arr = []
+let default_position = {
     lat: 10.7666851,
     lng: 106.641758
 };
-var infowindow;
-var directionsService;
-var directionsDisplay;
+let infowindow;
+let directionsService;
+let directionsDisplay;
 
 function initMap() {
     infowindow = new google.maps.InfoWindow({
@@ -123,14 +123,14 @@ function generateMotoBikeLocation(drivers, map) {
 }
 
 function clearOverlays() {
-    for (var i = 0; i < motobike_arr.length; i++) {
+    for (let i = 0; i < motobike_arr.length; i++) {
         motobike_arr[i].setMap(null);
     }
     motobike_arr.length = 0;
 }
 
 function circleDrawHandler(pos, map) {
-    var radius;
+    let radius;
     radius = $('select#radius').val();
     circle = new google.maps.Circle({
         center: pos,
@@ -148,7 +148,7 @@ function circleDrawHandler(pos, map) {
 }
 
 function geocodeAddress(geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
+    let address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
     }, function (results, status) {
@@ -207,7 +207,7 @@ function fetchDrivers(filter, display) {
     });
 }
 $(document).ready(function () {
-    var socket = io('http://localhost:8000');
+    let socket = io('http://localhost:8000');
     socket.on('connect', function () {
         let user_id = $('#hidden').data('user');
         socket.emit("LOCATE", user_id);
