@@ -56,8 +56,8 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="408" column="39" lean-forward="false" selection-start-line="408" selection-start-column="32" selection-end-line="408" selection-end-column="39" />
+            <state relative-caret-position="162">
+              <caret line="416" column="67" lean-forward="true" selection-start-line="415" selection-start-column="57" selection-end-line="416" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -221,6 +221,13 @@
               <item name="BARG_LOCATE" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="markers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BARG_LOCATE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BARG_LOCATE" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -307,18 +314,17 @@
       <workItem from="1510584158683" duration="8431000" />
       <workItem from="1510714826760" duration="183000" />
       <workItem from="1510717647166" duration="994000" />
-      <workItem from="1510724400419" duration="667000" />
+      <workItem from="1510724400419" duration="746000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67877000" />
+    <option name="totallyTimeSpent" value="67956000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-32" y="-4" width="1368" height="729" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="-4" width="1366" height="721" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22114669" sideWeight="0.49324325" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22114669" sideWeight="0.49324325" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4527027" sideWeight="0.25093076" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -712,8 +718,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="408" column="39" lean-forward="false" selection-start-line="408" selection-start-column="32" selection-end-line="408" selection-end-column="39" />
+        <state relative-caret-position="162">
+          <caret line="416" column="67" lean-forward="true" selection-start-line="415" selection-start-column="57" selection-end-line="416" selection-end-column="67" />
           <folding />
         </state>
       </provider>
