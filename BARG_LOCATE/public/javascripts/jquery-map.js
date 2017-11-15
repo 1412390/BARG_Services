@@ -5,7 +5,7 @@ var motobike;
 let drivers
 let min_driver
 let circle
-let driver_receive_point
+let send_to_driver
 var motobike_arr = []
 var default_position = {
     lat: 10.7666851,
@@ -111,7 +111,7 @@ function generateMotoBikeLocation(drivers,center,map,directionsDisplay) {
         if(min>drivers[i].value){
             min=drivers[i].value
             min_pos = pos
-            driver_receive_point= drivers[i]
+            send_to_driver= drivers[i]
         }
         motobike = new google.maps.Marker({
             map: map,
@@ -127,7 +127,7 @@ function generateMotoBikeLocation(drivers,center,map,directionsDisplay) {
             destination:  center,
             travelMode: 'DRIVING'
           };
-        console.log("driver_receiver",driver_receive_point)
+        console.log("driver_receiver",send_to_driver)
         marker.setMap(null)
         directionsDisplay.setMap(map)
         directionsService.route(request,function(result,status){
@@ -225,12 +225,25 @@ function fetchDrivers(filter, display) {
 }
 $(document).ready(function () {
     var socket = io('http://localhost:8000');
+    let point = null
+    $('#send_to_driver').on('click',function(){
+        if(send_to_driver){
+            alert(point.id)
+        }else{
+            const data={
+
+            }
+            socket.emit('send_to_driver', update_point);
+        }
+    })
     socket.on('connect', function () {
         let user_id = $('#hidden').data('user');
         socket.emit("LOCATE", user_id);
     });
     socket.on('recieve-data-from-phonis', function (data) {
         //confrim this locater recieved point
+        point = data
+        console.log("recieve-data-from-phonis",data)
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.point_id,
@@ -245,6 +258,8 @@ $(document).ready(function () {
     });
     socket.on('recieve-data-from-database', function (data) {
         //confrim this locater recieved point
+        console.log("recieve-data-from-database",data)
+        point = data
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.id,
@@ -252,7 +267,6 @@ $(document).ready(function () {
         };
 
         socket.emit('confirm-locater-locate-point', update_point);
-
         $('#address_root').val(data.address);
         $('#address').val(data.address);
         $('#submit').trigger('click');

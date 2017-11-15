@@ -22,5 +22,10 @@ block content
                     option(value="800") 800m
                     option(value="1000") 1km
             .form-group
-                input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")
+                .row
+                    .col-md-6
+                        input#submit(type='button', value='Tìm kiếm', class="btn btn-primary")              
+                    .col-md-6          
+                        input#send_to_driver(type='button', value='Chọn tài xế', class="btn btn-primary")
+                
     #map
