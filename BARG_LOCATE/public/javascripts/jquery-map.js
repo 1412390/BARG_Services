@@ -27,6 +27,25 @@ function initMap() {
         geocodeAddress(geocoder, map);
     });
 }
+function filterDriversWithRadius(drivers,radius,center,callback){
+    const motobikes=[]
+    if(radius==="all"){
+        callback(drivers)
+    }
+    else{
+        for (let i =0;i<drivers.length;i++){
+            const drive = new google.maps.LatLng({lat:drivers[i].lat,lng:drivers[i].lng})
+            let distance = google.maps.geometry.spherical.computeDistanceBetween(drive,center).toFixed(2);
+            if(distance <= parseInt(radius)){
+                motobikes.push(drivers[i])
+            }
+        }
+        return callback(motobikes)
+    }
+}
+function findMinWay(drivers,map,center){
+    
+}
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -93,6 +112,7 @@ function geocodeAddress(geocoder, resultsMap) {
     geocoder.geocode({'address': address}, function (results, status) {
         if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
+            marker ? marker.setMap(null):marker
             marker = new google.maps.Marker({
                 map: resultsMap,
                 position: results[0].geometry.location,
@@ -100,11 +120,15 @@ function geocodeAddress(geocoder, resultsMap) {
                 zoom:13
             });
             circle ? circle.setMap(null) : null
-            circleDrawHandler(results[0].geometry.location, resultsMap)
+            const radius = $('select#radius').val(); 
+            circleDrawHandler(results[0].geometry.location, resultsMap, radius)
             fetchDrivers(null,function(err,drivers){
-                !!err ?
+                    !!err ?
                     console.log(err)
-                    :  generateMotoBikeLocation(drivers, resultsMap)
+                    :
+                    filterDriversWithRadius(drivers,radius,results[0].geometry.location,function(result){
+                        generateMotoBikeLocation(result, resultsMap)
+                })
             })
             google.maps.event.addListener(marker, 'dragend', function () {
                 geocodePosition(marker.getPosition());
