@@ -11,5 +11,7 @@
     <orderEntry type="library" name="socket.io" level="application" />
     <orderEntry type="library" name="urchin" level="application" />
     <orderEntry type="library" name="bluebird.core" level="application" />
+    <orderEntry type="library" name="bluebird" level="application" />
+    <orderEntry type="library" name="axios" level="application" />
   </component>
 </module>

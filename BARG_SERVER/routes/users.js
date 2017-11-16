@@ -229,7 +229,7 @@ router.post('/set-point', function (req, res, next) {
 router.post('/get-point-locating', function (req, res, next) {
 
   const user_id = req.body.user_id;
-  const sql = `SELECT* FROM point where user_id = ${user_id} LIMIT 1`;
+  const sql = `SELECT* FROM point where user_id = ${user_id} and status=0 LIMIT 1`;
   db.load(sql)
     .then(
     data => {
