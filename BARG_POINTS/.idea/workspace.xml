@@ -17,8 +17,30 @@
       <file leaf-file-name="jquery-switchboard.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-switchboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+            <state relative-caret-position="112">
+              <caret line="95" column="48" lean-forward="false" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
+              <folding>
+                <element signature="e#1297#1781#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/users.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="218" column="0" lean-forward="true" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -124,6 +146,7 @@
         <option value="$PROJECT_DIR$/views/users/layout/layout_2.jade" />
         <option value="$PROJECT_DIR$/public/stylesheets/style_switchboard.css" />
         <option value="$PROJECT_DIR$/views/users/switchboard.jade" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/public/javascripts/jquery-switchboard.js" />
       </list>
     </option>
@@ -140,10 +163,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-32" />
-    <option name="y" value="-4" />
-    <option name="width" value="858" />
-    <option name="height" value="719" />
+    <option name="x" value="366" />
+    <option name="y" value="146" />
+    <option name="width" value="856" />
+    <option name="height" value="683" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -291,12 +314,12 @@
       <workItem from="1510774757337" duration="95000" />
       <workItem from="1510796650411" duration="1592000" />
       <workItem from="1510820859250" duration="4595000" />
-      <workItem from="1510825510049" duration="3639000" />
+      <workItem from="1510825510049" duration="6474000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31453000" />
+    <option name="totallyTimeSpent" value="34288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="721" extended-state="6" />
@@ -334,14 +357,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/users/layout/layout_2.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="50" lean-forward="true" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style_switchboard.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -367,7 +382,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1297#1781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -602,13 +619,6 @@
     <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-located.js" />
     <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-is-locating.js" />
     <entry file="file://$PROJECT_DIR$/views/users/located.jade" />
-    <entry file="file://$PROJECT_DIR$/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="218" column="0" lean-forward="true" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/users/profile.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -649,11 +659,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="218" column="0" lean-forward="true" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-switchboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="112">
+          <caret line="95" column="48" lean-forward="false" selection-start-line="95" selection-start-column="48" selection-end-line="95" selection-end-column="48" />
+          <folding>
+            <element signature="e#1297#1781#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

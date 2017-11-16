@@ -246,17 +246,17 @@ $(document).ready(function () {
     let socket = io('http://localhost:8000');
     let point = null
     $('#send_to_driver').on('click', function () {
+        console.log('ls drivers '  , send_to_driver);
         if (!send_to_driver) {
-            alert("232")
             return null;
         } else {
             const data = {
-                point_id: point.id,
+                point_id: point,
                 driver: send_to_driver
             }
             axios.put('http://localhost:8080/users/send_to_driver', data)
                 .then(response => {
-                    socket.emit("point_receive_drive", "OK")
+                    socket.emit("send_to_driver");
                     location.reload()
                 })
                 .catch(err => {
@@ -270,14 +270,13 @@ $(document).ready(function () {
     });
     socket.on('recieve-data-from-phonis', function (data) {
         //confrim this locater recieved point
-        point = data
         console.log("recieve-data-from-phonis", data)
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.point_id,
             status: 0
         };
-
+        point =  data.point_id;
         socket.emit('confirm-locater-locate-point', update_point);
 
         $('#address_root').val(data.address);
@@ -287,13 +286,12 @@ $(document).ready(function () {
     socket.on('recieve-data-from-database', function (data) {
         //confrim this locater recieved point
         console.log("recieve-data-from-database", data)
-        point = data
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.id,
             status: 0
         };
-
+        point =  data.id;
         socket.emit('confirm-locater-locate-point', update_point);
         $('#address_root').val(data.address);
         $('#address').val(data.address);

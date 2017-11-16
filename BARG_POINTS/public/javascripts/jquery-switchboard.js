@@ -71,18 +71,35 @@ $(document).ready(function () {
                 console.log(err)
             });
     }
+    function getPointLocated(){
+        axios.get('http://localhost:8080/users/get-all-point-located')
+            .then(response => {
+                let tr = '';
+                for(i=0; i< response.data.ls_point.length; i++) {
+
+                    tr += addDataToTr(response.data.ls_point[i]);
+                }
+                if(currentview === 2){
+                    $('#tbody').html(tr);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    }
     socket.on('get-point-not-located', function () {
-        toastMsg('Có thêm điểm chưa định vị');
         getPointNotLocated();
     });
-    socket.on('get-point-is-locating', function (ls_point) {
-        toastMsg('Có thêm điểm đang định vị');
+    socket.on('get-point-is-locating', function () {
          getPointIsLocating();
+    });
+    socket.on('get-point-located', function () {
+        getPointLocated();
     });
     $('#sel').on('change', function(){
 
         val = $(this).val();
-
+        $('#tbody').html('');
         switch(val){
             case "0":
                 currentview=0;
@@ -94,16 +111,7 @@ $(document).ready(function () {
                 break;
             case "2":
                 currentview=2
-                alert('Có thêm điểm đã định vị');
-                socket.emit('get-point-located', socket_id);
-                socket.on('get-point-located', function (ls_point) {
-                    let tr = '';
-                    for(i=0; i< ls_point.length; i++) {
-
-                        tr += addDataToTr(ls_point[i]);
-                    }
-                    $('#tbody').html(tr);
-                });
+                getPointLocated();
                 break;
             default:
                 break;

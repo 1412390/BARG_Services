@@ -97,82 +97,16 @@ io.on('connection', function (socket) {
         axios.post(url, data)
             .then(response => {
                 //send data to all manager
-
                 POINT.socket_id.forEach(function (id) {
                     io.to(id).emit("get-point-is-locating");
                 });
-
-                // const url = config.URL_SERVER + "/users/get-all-point-is-locating";
-                // return axios.get(url);
-            })
-            // .then(
-            // response => {
-            //     if (response.data.success) {
-            // POINT.socket_id.forEach(function (id) {
-            //     io.to(id).emit("get-point-is-locating", response.data.ls_point);
-            // });
-            //     }
-            // })
-            .catch(function (err) { console.log(err + ""); });
-    });
-    socket.on('send_to_driver', function (data) {
-
-        const url = config.URL_SERVER + "/users/set-confirm-driver-recived-point";
-
-        axios.post(url, data)
-            .then(response => {
-                //send data to all manager
-                const url = config.URL_SERVER + "/users/get-all-point-located";
-                return axios.get(url);
-            })
-            .then(
-            response => {
-                if (response.data.success) {
-                    POINT.socket_id.forEach(function (id) {
-                        io.to(id).emit("get-point-located", response.data.ls_point);
-                    });
-                }
             })
             .catch(function (err) { console.log(err + ""); });
     });
-    // socket.on('get-point-not-located', function (socket_id) {
-    //     //send data to manager
-    //     const url = config.URL_SERVER + "/users/get-all-point-not-locate";
-
-    //     axios.get(url)
-    //         .then(
-    //         response => {
-    //             if (response.data.success) {
-    //                 io.to(socket_id).emit("get-point-not-located", response.data.ls_point);
-    //             }
-    //         })
-    //         .catch(function (err) { console.log(err + ""); });
-    // });
-    // socket.on('get-point-is-locating', function (socket_id) {
-    //     //send data to manager
-    //     const url = config.URL_SERVER + "/users/get-all-point-is-locating";
-
-    //     axios.get(url)
-    //         .then(
-    //         response => {
-    //             if (response.data.success) {
-    //                 io.to(socket_id).emit("get-point-is-locating", response.data.ls_point);
-    //             }
-    //         })
-    //         .catch(function (err) { console.log(err + ""); });
-    // });
-    socket.on('get-point-located', function (socket_id) {
-        //send data to manager
-        const url = config.URL_SERVER + "/users/get-all-point-located";
-
-        axios.get(url)
-            .then(
-            response => {
-                if (response.data.success) {
-                    io.to(socket_id).emit("get-point-located", response.data.ls_point);
-                }
-            })
-            .catch(function (err) { console.log(err + ""); });
+    socket.on('send_to_driver', function () {
+        POINT.socket_id.forEach(function (id) {
+            io.to(id).emit("get-point-located");
+        });
     });
 });
 app.listen(8000, function () {
