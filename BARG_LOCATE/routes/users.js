@@ -163,7 +163,6 @@ router.post('/register', function (req, res, next) {
     }
 });
 router.get('/profile', function (req, res, next) {
-
     let login = localStorage.getItem('login');
     if(login){//true
 
@@ -172,14 +171,13 @@ router.get('/profile', function (req, res, next) {
         const data = {
             token: token
         };
-
         let url = config.URL_SERVER + "/users/get-information";
         axios.post(url, data).then(
             response => {
-
                 let success = response.data.success;
                 if(success){
                     let user = response.data.user;
+                    console.log("response183", user)
                     localStorage.setItem('user_id', user.id);
                     return res.render('users/profile', {status: localStorage.getItem('login')});
                 }

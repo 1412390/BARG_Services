@@ -227,13 +227,20 @@ $(document).ready(function () {
     var socket = io('http://localhost:8000');
     let point = null
     $('#send_to_driver').on('click',function(){
-        if(send_to_driver){
-            alert(point.id)
+        if(!send_to_driver){
         }else{
             const data={
-
+                point_id: point.id,
+                driver: send_to_driver
             }
-            socket.emit('send_to_driver', update_point);
+            axios.put('http://localhost:8080/users/send_to_driver',data)
+            .then(response=>{
+                socket.emit("point_receive_drive","OK")
+                console.log("mess", response.data)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         }
     })
     socket.on('connect', function () {
