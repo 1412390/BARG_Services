@@ -69,8 +69,9 @@ function userExist(username) {
 /* GET users listing. */
 router.put('/send_to_driver',function(req,res,next){
   const data = req.body
-  const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
+  const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}, lat = ${data.lat}, lng=${data.lng}  WHERE id=${data.point_id}`;
   const sql_driver = `UPDATE drivers SET status="busy" WHERE id=${data.driver.id}`;
+
   db.update(sql_driver)
   .then(result=>{
     return db.update(sql)
@@ -208,12 +209,15 @@ router.post('/set-point', function (req, res, next) {
     note = req.body.note,
     status = req.body.status,
     user_id = req.body.user_id;
-  const sql = `INSERT INTO point(address, type, note, status, user_id) VALUES (
+  const sql = `INSERT INTO point(address, type, note, status, user_id, driver_id, lat, lng) VALUES (
     '${address}',
     ${type},
     '${note}',
     ${status},
-    ${user_id}    
+    ${user_id},
+    -1,
+    -1,
+    -1    
   )`;
   db.insert(sql)
     .then(
@@ -328,6 +332,7 @@ router.post('/set-confirm-locater-locating-point', function (req, res, next) {
   let user_id = req.body.user_id;
   let point_id = req.body.point_id;
   let status = req.body.status;
+
   const sql = `UPDATE point SET status=${status},user_id=${user_id} WHERE id = ${point_id}`;
   db.load(sql)
     .then(

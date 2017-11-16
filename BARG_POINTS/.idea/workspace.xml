@@ -162,7 +162,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="366" />
     <option name="y" value="146" />
     <option name="width" value="856" />
@@ -314,15 +314,15 @@
       <workItem from="1510774757337" duration="95000" />
       <workItem from="1510796650411" duration="1592000" />
       <workItem from="1510820859250" duration="4595000" />
-      <workItem from="1510825510049" duration="6474000" />
+      <workItem from="1510825510049" duration="7071000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34288000" />
+    <option name="totallyTimeSpent" value="34885000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1366" height="721" extended-state="6" />
+    <frame x="0" y="-4" width="1366" height="721" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34623978" sideWeight="0.49324325" order="3" side_tool="false" content_ui="combo" />

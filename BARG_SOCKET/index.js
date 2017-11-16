@@ -38,11 +38,13 @@ io.on('connection', function (socket) {
                     io.to(socket.id).emit("recieve-data-from-database", point);
                 }
                 else {//this locater not locate any point
+                
                     const url = config.URL_SERVER + "/users/get-point-not-locate";
                     axios.get(url)
                         .then(
                         response => {
                             if (response.data.success) {//has a point which not located
+                            
                                 var point = response.data.point;
                                 io.to(socket.id).emit("recieve-data-from-database", point);
                             }

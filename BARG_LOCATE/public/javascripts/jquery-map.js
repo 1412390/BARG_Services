@@ -211,14 +211,6 @@ function geocodeAddress(geocoder, resultsMap) {
             google.maps.event.addListener(marker, 'dragend', function () {
                 geocodePosition(marker.getPosition());
             });
-            // google.maps.event.addListener(marker, 'click', function () {
-            //     if (marker.formatted_address) {
-            //         infowindow.setContent(marker.formatted_address + "<br>coordinates: " + marker.getPosition().toUrlValue(6));
-            //     } else {
-            //         infowindow.setContent('Cannot determine address at this location.');
-            //     }
-            //     infowindow.open(map, marker);
-            // });
             google.maps.event.trigger(marker, 'click');
             if (results[0].geometry.viewport)
                 resultsMap.fitBounds(results[0].geometry.viewport);
@@ -250,18 +242,31 @@ $(document).ready(function () {
         if (!send_to_driver) {
             return null;
         } else {
-            const data = {
-                point_id: point,
-                driver: send_to_driver
-            }
-            axios.put('http://localhost:8080/users/send_to_driver', data)
-                .then(response => {
-                    socket.emit("send_to_driver");
-                    location.reload()
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            let address = document.getElementById('address_root').value;
+            let lat = null;
+            let lng = null;
+            geocoder.geocode({
+                'address': address
+            }, function (results, status) {
+                if (status === 'OK') {
+                    lat = results[0].geometry.location.lat();
+                    lng = results[0].geometry.location.lng();
+                    const data = {
+                        point_id: point,
+                        driver: send_to_driver,
+                        lat: lat,
+                        lng: lng
+                    }
+                    axios.put('http://localhost:8080/users/send_to_driver', data)
+                        .then(response => {
+                            socket.emit("send_to_driver");
+                            location.reload()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
+            });
         }
     })
     socket.on('connect', function () {
@@ -270,13 +275,14 @@ $(document).ready(function () {
     });
     socket.on('recieve-data-from-phonis', function (data) {
         //confrim this locater recieved point
+        point = data.point_id;
         console.log("recieve-data-from-phonis", data)
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.point_id,
             status: 0
         };
-        point =  data.point_id;
+
         socket.emit('confirm-locater-locate-point', update_point);
 
         $('#address_root').val(data.address);
@@ -286,12 +292,13 @@ $(document).ready(function () {
     socket.on('recieve-data-from-database', function (data) {
         //confrim this locater recieved point
         console.log("recieve-data-from-database", data)
+        point = data.id;
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.id,
             status: 0
         };
-        point =  data.id;
+        console.log('update_point ' ,update_point);
         socket.emit('confirm-locater-locate-point', update_point);
         $('#address_root').val(data.address);
         $('#address').val(data.address);
