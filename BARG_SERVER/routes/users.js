@@ -69,8 +69,12 @@ function userExist(username) {
 /* GET users listing. */
 router.put('/send_to_driver',function(req,res,next){
   const data = req.body
-  const sql = `UPDATE point SET status=2, driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
-  db.update(sql)
+  const sql = `UPDATE point SET status=1, driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
+  const sql_driver = `UPDATE drivers SET status="busy" WHERE id=${data.driver.id}`;
+  db.update(sql_driver)
+  .then(result=>{
+    return db.update(sql)
+  })
   .then(result=>{
     res.json({
       message:"updated success",
