@@ -9,41 +9,62 @@ const bcrypt = require(config.Bcrypt);
 const saltRounds = config.saltRounds;
 const q = require('q');
 
-function decodedToken(token){
-  let d = q.defer();
-  jwt.verify(token, secretOrPrivateKey, function(err, decoded){
-    if(err) {
-      d.resolve({success: false});
+function getPoint(status) {
+  d = q.defer()
+  const sql = `select* from point where stats = ${status}`;
+  db.load(sql)
+    .then(
+    data => {
+      if (data.length > 0) {
+        d.resolve({ success: true, point: data[0] });
+      }
+      else {
+        d.resolve({ success: false });
+      }
     }
-    else{
-      d.resolve({success: true, user_id: decoded.user_id});
-    }    
+    )
+    .catch(err => d.resolve({ success: false }));
+  return d.promise;
+}
+function decodedToken(token) {
+  let d = q.defer();
+  jwt.verify(token, secretOrPrivateKey, function (err, decoded) {
+    if (err) {
+      d.resolve({ success: false });
+    }
+    else {
+      d.resolve({ success: true, user_id: decoded.user_id });
+    }
   });
-  return d.promise;}
-function bcryptHash(password){
+  return d.promise;
+}
+function bcryptHash(password) {
   let d = q.defer();
   bcrypt.hash(password, saltRounds)
-  .then(
+    .then(
     hash => {
-      d.resolve({success: true, getHash: hash});
-  })
-  .catch(err => {d.resolve({success: false})});
-  return d.promise;}
+      d.resolve({ success: true, getHash: hash });
+    })
+    .catch(err => { d.resolve({ success: false }) });
+  return d.promise;
+}
 function bcryptCompare(password, hash) {
   let d = q.defer();
   bcrypt.compare(password, hash)
-  .then(response =>{d.resolve(response);})
-  .catch(err => {d.resolve(false);});
-  return d.promise;  }
-function userExist(username){
+    .then(response => { d.resolve(response); })
+    .catch(err => { d.resolve(false); });
+  return d.promise;
+}
+function userExist(username) {
   let d = q.defer();
   let sql = `select* from user where username = '${username}'`;
   db.load(sql)
-  .then(data => {
-    data.length === 0 ?  d.resolve({success: false}) : d.resolve({user: data[0],success: true});
-  })
-  .catch(err => {d.resolve({success: false});});
-  return d.promise;}
+    .then(data => {
+      data.length === 0 ? d.resolve({ success: false }) : d.resolve({ user: data[0], success: true });
+    })
+    .catch(err => { d.resolve({ success: false }); });
+  return d.promise;
+}
 
 /* GET users listing. */
 router.put('/send_to_driver',function(req,res,next){
@@ -61,28 +82,29 @@ router.put('/send_to_driver',function(req,res,next){
   })
 })
 router.get('/', function (req, res, next) {res.send('respond with a resource');});
+router.get('/', function (req, res, next) { res.send('respond with a resource'); });
 router.post('/login', function (req, res, next) {
 
   let username = req.body.username;
   let password = req.body.password;
-  let payload = {user_id: null};
+  let payload = { user_id: null };
   userExist(username)
-  .then(//check user is exist  
+    .then(//check user is exist  
     data => {
-      if(data.success){
+      if (data.success) {
         let hash = data.user.password;
         payload.user_id = data.user.id;
         return bcryptCompare(password, hash);
       }
-      else{//user is not exist
+      else {//user is not exist
         res.json({
           success: false,
           err: "User is not exist!",
         });
       }
     }
-  )
-  .then(//check password
+    )
+    .then(//check password
     check => {
       if (check) {//true
         let token = jwt.sign(payload, secretOrPrivateKey);
@@ -99,8 +121,9 @@ router.post('/login', function (req, res, next) {
         });
       }
     }
-  )
-  .catch(err => {console.log(err + "")}); });
+    )
+    .catch(err => { console.log(err + "") });
+});
 router.post('/register', function (req, res, next) {
 
   let username = req.body.username,
@@ -111,23 +134,23 @@ router.post('/register', function (req, res, next) {
 
   //if user exist
   userExist(username)
-  .then(
+    .then(
     data => {
-      if(data.success){//if user exist
+      if (data.success) {//if user exist
         return res.json({
           success: false,
           err: "User is exist!",
         });
       }
-      else{
+      else {
         return bcryptHash(password);//hash pasword by bcrypt
       }
     }
-  )
-  .then(
+    )
+    .then(
     hash => {
-        if(hash.success){//hash password success
-          let sql = `INSERT INTO user(username, password, name, email, dob, role) VALUES (
+      if (hash.success) {//hash password success
+        let sql = `INSERT INTO user(username, password, name, email, dob, role) VALUES (
             '${username}',
             '${hash.getHash}',
             '${name}',
@@ -135,33 +158,34 @@ router.post('/register', function (req, res, next) {
             ${dob},
             -1
           )`;
-          return db.insert(sql);
-        }
+        return db.insert(sql);
+      }
     }
-  )
-  .then(//insert user
+    )
+    .then(//insert user
     data => {
       return res.json({
         success: true
       });
     }
-  )
-  .catch(err => console.log(err + ""));});
+    )
+    .catch(err => console.log(err + ""));
+});
 router.post('/get-information', function (req, res, next) {
 
   let token = req.body.token;
   decodedToken(token)
-  .then(
+    .then(
     decoded => {
-      if(decoded.success){
+      if (decoded.success) {
         let user_id = decoded.user_id;
         console.log("iser",user_id)
         const sql = `select* from user where id = ${user_id}`;
         return db.load(sql);
       }
     }
-  )
-  .then(
+    )
+    .then(
     data => {
       console.log("data150",data)
       let dob = new Date(data[0].dob * 1000);
@@ -171,8 +195,9 @@ router.post('/get-information', function (req, res, next) {
         user: data[0]
       });
     }
-  )
-  .catch(err => console.log(err + ""));});
+    )
+    .catch(err => console.log(err + ""));
+});
 router.post('/set-point', function (req, res, next) {
 
   let address = req.body.address,
@@ -188,20 +213,21 @@ router.post('/set-point', function (req, res, next) {
     ${user_id}    
   )`;
   db.insert(sql)
-  .then(
+    .then(
     data => {
       res.json({
         success: true,
         id: data
       });
     })
-  .catch(err =>  console.log(err + ""));});
+    .catch(err => console.log(err + ""));
+});
 router.post('/get-point-locating', function (req, res, next) {
 
   const user_id = req.body.user_id;
   const sql = `SELECT* FROM point where user_id = ${user_id} LIMIT 1`;
   db.load(sql)
-  .then(
+    .then(
     data => {
       if (data.length > 0) {
         res.json({
@@ -216,12 +242,12 @@ router.post('/get-point-locating', function (req, res, next) {
         });
       }
     })
-  .catch(err => console.log(err + ""));});
-
+    .catch(err => console.log(err + ""));
+});
 router.get('/get-point-not-locate', function (req, res, next) {
   const sql = `SELECT* FROM point where status = -1 LIMIT 1`;
   db.load(sql)
-  .then(
+    .then(
     data => {
       if (data.length > 0) {
         res.json({
@@ -230,14 +256,51 @@ router.get('/get-point-not-locate', function (req, res, next) {
         });
       }
       else {
-        return res.json({
-          success: false,
-          point: null
+        res.json({
+          success: false
         });
       }
     })
-  .catch(err => console.log(err + ""));});
-
+    .catch(err => console.log(err + ""));
+});
+router.get('/get-all-point-not-locate', function (req, res, next) {
+  const sql = `SELECT* FROM point where status = -1 ORDER BY id DESC`;
+  db.load(sql)
+    .then(
+    list => {
+      if (list.length > 0) {
+        return res.json({
+          success: true,
+          ls_point: list
+        });
+      }
+      else {
+        return res.json({
+          success: false,
+        });
+      }
+    })
+    .catch(err => console.log(err + ""));
+});
+router.get('/get-all-point-is-locating', function (req, res, next) {
+  const sql = `SELECT* FROM point where status = 0 ORDER BY id DESC`;
+  db.load(sql)
+    .then(
+    list => {
+      if (list.length > 0) {
+        return res.json({
+          success: true,
+          ls_point: list
+        });
+      }
+      else {
+        return res.json({
+          success: false,
+        });
+      }
+    })
+    .catch(err => console.log(err + ""));
+});
 router.post('/set-confirm-locater-locating-point', function (req, res, next) {
 
   let user_id = req.body.user_id;
@@ -245,12 +308,13 @@ router.post('/set-confirm-locater-locating-point', function (req, res, next) {
   let status = req.body.status;
   const sql = `UPDATE point SET status=${status},user_id=${user_id} WHERE id = ${point_id}`;
   db.load(sql)
-  .then(
+    .then(
     data => {
       res.json({
         success: true
       });
-    },
-  )
-  .catch( err =>console.log(err + ""));});
+    })
+    .catch(err => console.log(err + ""));
+});
+
 module.exports = router;

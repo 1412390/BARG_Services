@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="socket.io" level="application" />
     <orderEntry type="library" name="urchin" level="application" />
+    <orderEntry type="library" name="bluebird.core" level="application" />
   </component>
 </module>
