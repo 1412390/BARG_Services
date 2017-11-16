@@ -54,7 +54,7 @@ exports.insert = sql => {
 
 exports.update = (sql) => {
     let d = q.defer();
-
+    console.log("sql",sql)
     let cn = mysql.createConnection({
         host: _HOST,
         user: _USER,
@@ -64,9 +64,11 @@ exports.update = (sql) => {
     cn.connect();
     cn.query(sql, (err, rows, fields) => {
         if (err) {
-            d.reject(err);
+            console.log("67")
+            d.reject(err)
         } else {
-            d.resolve(rows);
+            console.log("70")            
+            d.resolve(1);
         }
         cn.end();
     });

@@ -1,4 +1,5 @@
 const express = require('express');
+const multiparty = require('multiparty')
 const router = express.Router();
 const config = require('../config');
 const db = require(config.PATH_DB);
@@ -66,6 +67,25 @@ function userExist(username) {
 }
 
 /* GET users listing. */
+router.put('/send_to_driver',function(req,res,next){
+  const data = req.body
+  const sql = `UPDATE point SET status=1, driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
+  const sql_driver = `UPDATE drivers SET status="busy" WHERE id=${data.driver.id}`;
+  db.update(sql_driver)
+  .then(result=>{
+    return db.update(sql)
+  })
+  .then(result=>{
+    res.json({
+      message:"updated success",
+      status:"OK"
+    })
+  })
+  .catch(err=>{
+    console.log("err",err)
+  })
+})
+router.get('/', function (req, res, next) {res.send('respond with a resource');});
 router.get('/', function (req, res, next) { res.send('respond with a resource'); });
 router.post('/login', function (req, res, next) {
 
@@ -163,6 +183,7 @@ router.post('/get-information', function (req, res, next) {
     decoded => {
       if (decoded.success) {
         let user_id = decoded.user_id;
+        console.log("iser",user_id)
         const sql = `select* from user where id = ${user_id}`;
         return db.load(sql);
       }
@@ -170,6 +191,7 @@ router.post('/get-information', function (req, res, next) {
     )
     .then(
     data => {
+      console.log("data150",data)
       let dob = new Date(data[0].dob * 1000);
       data[0].dob = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
       return res.json({
