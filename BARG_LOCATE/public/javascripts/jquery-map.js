@@ -3,11 +3,18 @@ let map;
 let geocoder;
 let marker;
 let motobike;
+var map;
+var geocoder;
+var marker;
+var motobike;
 let drivers
 let min_driver
 let circle
 let motobike_arr = []
 let default_position = {
+let send_to_driver
+var motobike_arr = []
+var default_position = {
     lat: 10.7666851,
     lng: 106.641758
 };
@@ -26,18 +33,12 @@ function initMap() {
         center: default_position,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    fetchDrivers(null, function (err, drivers) {
-        !!err ?
-            console.log(err) :
-            generateMotoBikeLocation(drivers, map)
-    })
     geocoder = new google.maps.Geocoder();
     document.getElementById('submit').addEventListener('click', function () {
         clearOverlays();
         geocodeAddress(geocoder, map);
     });
 }
-
 function filterDriversWithRadius(drivers, radius, center,directionsService) {
     return new Promise(function(resolve){
         const motobikes = []
@@ -45,7 +46,7 @@ function filterDriversWithRadius(drivers, radius, center,directionsService) {
         if (radius === "all") {
             resolve(drivers)
         } else {
-            Promise.map(drivers,(item)=>{
+            new Promise.map(drivers,function(item){
                 const drive = new google.maps.LatLng({
                     lat: item.lat,
                     lng: item.lng
@@ -53,14 +54,16 @@ function filterDriversWithRadius(drivers, radius, center,directionsService) {
                 let distance = google.maps.geometry.spherical.computeDistanceBetween(drive, center).toFixed(2);
                 if (distance <= parseInt(radius)) {
                     return getDirectionDistance(center,drive,directionsService).then(value=>{
-                        return item.value=value
+                        item.value = value
+                        return item
                     })
                 }
             })
-            .then(array_results=>{
-                console.log("array_result", array_results)
+            .then(function(array_results){
+                array_results = array_results.filter(item=>!!item)
+                resolve(array_results)
             })
-            }
+        }
     })
 }
 
@@ -75,8 +78,7 @@ function getDirectionDistance(center, driver, directionsService) {
     };
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
-            console.log("result_38", result.routes[0].legs[0].distance.value)
-            callback(result.routes[0].legs[0].distance.value)
+            resolve(result.routes[0].legs[0].distance.value)
         }
     })
 })  
@@ -99,18 +101,24 @@ function geocodePosition(pos) {
         infowindow.open(map, marker);
     });
 }
-
-function generateMotoBikeLocation(drivers, map) {
+function generateMotoBikeLocation(drivers,center,map,directionsDisplay) {
     icon = {
         url: 'https://image.flaticon.com/icons/svg/296/296210.svg',
         scaledSize: new google.maps.Size(50, 50),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(30, 30)
     };
+    let min = drivers[0].value
+    let min_pos=null
     for (let i = 0; i < drivers.length; i++) {
         let pos = {
             lat: drivers[i].lat,
             lng: drivers[i].lng
+        }
+        if(min>drivers[i].value){
+            min=drivers[i].value
+            min_pos = pos
+            send_to_driver= drivers[i]
         }
         motobike = new google.maps.Marker({
             map: map,
@@ -119,6 +127,21 @@ function generateMotoBikeLocation(drivers, map) {
             draggable: true,
         })
         motobike_arr.push(motobike)
+    }
+    if(center && min_pos){
+        var request = {
+            origin: new google.maps.LatLng(min_pos),
+            destination:  center,
+            travelMode: 'DRIVING'
+          };
+        console.log("driver_receiver",send_to_driver)
+        marker.setMap(null)
+        directionsDisplay.setMap(map)
+        directionsService.route(request,function(result,status){
+            if (status == 'OK') {
+                directionsDisplay.setDirections(result);
+              }
+        })
     }
 }
 
@@ -149,6 +172,8 @@ function circleDrawHandler(pos, map) {
 
 function geocodeAddress(geocoder, resultsMap) {
     let address = document.getElementById('address').value;
+    directionsDisplay.setMap(null)    
+    var address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
     }, function (results, status) {
@@ -169,7 +194,7 @@ function geocodeAddress(geocoder, resultsMap) {
                     console.log(err) :
                         filterDriversWithRadius(drivers, radius, results[0].geometry.location,directionsService)
                     .then(result=>{
-                        generateMotoBikeLocation(result, resultsMap)
+                        generateMotoBikeLocation(result,results[0].geometry.location, resultsMap,directionsDisplay)
                     })
             })
             google.maps.event.addListener(marker, 'dragend', function () {
@@ -208,12 +233,26 @@ function fetchDrivers(filter, display) {
 }
 $(document).ready(function () {
     let socket = io('http://localhost:8000');
+    var socket = io('http://localhost:8000');
+    let point = null
+    $('#send_to_driver').on('click',function(){
+        if(send_to_driver){
+            alert(point.id)
+        }else{
+            const data={
+
+            }
+            socket.emit('send_to_driver', update_point);
+        }
+    })
     socket.on('connect', function () {
         let user_id = $('#hidden').data('user');
         socket.emit("LOCATE", user_id);
     });
     socket.on('recieve-data-from-phonis', function (data) {
         //confrim this locater recieved point
+        point = data
+        console.log("recieve-data-from-phonis",data)
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.point_id,
@@ -228,6 +267,8 @@ $(document).ready(function () {
     });
     socket.on('recieve-data-from-database', function (data) {
         //confrim this locater recieved point
+        console.log("recieve-data-from-database",data)
+        point = data
         const update_point = {
             user_id: $('#hidden').data('user'),
             point_id: data.id,
@@ -235,7 +276,6 @@ $(document).ready(function () {
         };
 
         socket.emit('confirm-locater-locate-point', update_point);
-
         $('#address_root').val(data.address);
         $('#address').val(data.address);
         $('#submit').trigger('click');
