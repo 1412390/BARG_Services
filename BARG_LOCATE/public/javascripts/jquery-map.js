@@ -146,11 +146,6 @@ function generateMotoBikeLocation(drivers, center, map, directionsDisplay) {
             lat: drivers[i].lat,
             lng: drivers[i].lng
         }
-        // if(adrivers[i].value && min >= adrivers[i].value){
-        //     min=drivers[i].value
-        //     min_pos = pos
-        //     send_to_driver= drivers[i]
-        // }
         motobike = new google.maps.Marker({
             map: map,
             position: pos,
@@ -159,21 +154,6 @@ function generateMotoBikeLocation(drivers, center, map, directionsDisplay) {
         })
         motobike_arr.push(motobike)
     }
-    // if(center && min_pos){
-    //     var request = {
-    //         origin: new google.maps.LatLng(min_pos),
-    //         destination:  center,
-    //         travelMode: 'DRIVING'
-    //       };
-    //     console.log("driver_receiver",send_to_driver)
-    //     marker.setMap(null)
-    //     directionsDisplay.setMap(map)
-    //     directionsService.route(request,function(result,status){
-    //         if (status == 'OK') {
-    //             directionsDisplay.setDirections(result);
-    //           }
-    //     })
-    // }
 }
 
 function clearOverlays() {
@@ -219,13 +199,12 @@ function geocodeAddress(geocoder, resultsMap) {
             circle ? circle.setMap(null) : null
             const radius = $('select#radius').val();
             circleDrawHandler(results[0].geometry.location, resultsMap, radius)
-            fetchDrivers(null, function (err, drivers) {
+            fetchDrivers("free", function (err, drivers) {
                 !!err ?
                     console.log(err) :
                     filterDriversWithRadius(drivers, radius, results[0].geometry.location, directionsService)
                     .then(result => {
                         generateMotoBikeLocation(result, results[0].geometry.location, resultsMap, directionsDisplay)
-                        console.log((radius && radius != "all"))
                         radius && radius != "all" && drawDirection(result, resultsMap, results[0].geometry.location)
                     })
             })
@@ -271,7 +250,6 @@ $(document).ready(function () {
             alert("232")
             return null;
         } else {
-            alert("235")
             const data = {
                 point_id: point.id,
                 driver: send_to_driver
@@ -279,7 +257,7 @@ $(document).ready(function () {
             axios.put('http://localhost:8080/users/send_to_driver', data)
                 .then(response => {
                     socket.emit("point_receive_drive", "OK")
-                    console.log("mess", response.data)
+                    location.reload()
                 })
                 .catch(err => {
                     console.log(err)

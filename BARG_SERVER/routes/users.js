@@ -69,7 +69,7 @@ function userExist(username) {
 /* GET users listing. */
 router.put('/send_to_driver',function(req,res,next){
   const data = req.body
-  const sql = `UPDATE point SET status=1, driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
+  const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}  WHERE id=${data.point_id}`;
   const sql_driver = `UPDATE drivers SET status="busy" WHERE id=${data.driver.id}`;
   db.update(sql_driver)
   .then(result=>{
@@ -183,7 +183,6 @@ router.post('/get-information', function (req, res, next) {
     decoded => {
       if (decoded.success) {
         let user_id = decoded.user_id;
-        console.log("iser",user_id)
         const sql = `select* from user where id = ${user_id}`;
         return db.load(sql);
       }
