@@ -283,6 +283,25 @@ router.get('/get-all-point-is-locating', function (req, res, next) {
     })
     .catch(err => console.log(err + ""));
 });
+router.get('/get-all-point-located', function (req, res, next) {
+  const sql = `SELECT* FROM point where status = 1 ORDER BY id DESC`;
+  db.load(sql)
+    .then(
+    list => {
+      if (list.length > 0) {
+        return res.json({
+          success: true,
+          ls_point: list
+        });
+      }
+      else {
+        return res.json({
+          success: false,
+        });
+      }
+    })
+    .catch(err => console.log(err + ""));
+});
 router.post('/set-confirm-locater-locating-point', function (req, res, next) {
 
   let user_id = req.body.user_id;
@@ -298,5 +317,18 @@ router.post('/set-confirm-locater-locating-point', function (req, res, next) {
     })
     .catch(err => console.log(err + ""));
 });
-
+router.post('/set-confirm-driver-recived-point', function(req, res, next){
+  let point_id = req.body.point_id;
+  let driver_id = req.body.driver_id;
+  let status = req.body.status;
+  const sql = `UPDATE point SET status=${status},driver_id=${driver_id} WHERE id = ${point_id}`;
+  db.load(sql)
+    .then(
+    data => {
+      res.json({
+        success: true
+      });
+    })
+    .catch(err => console.log(err + ""));
+});
 module.exports = router;
