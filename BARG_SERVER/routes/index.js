@@ -84,13 +84,15 @@ router.get('/drivers',(req,res,next)=>{
 router.get('/point/:id',(req,res,next)=>{
   let sql = `select * from point where id=${req.params.id}`
   let result={}
+  let distance
   db.load(sql)
   .then(response=>{
     let data = response[0]
     result.user={
       lat:data.lat,
-      lng:data.lng     
+      lng:data.lng   
     }
+    distance = data.distance
     sql = `select * from drivers where id = ${data.driver_id}`
     return db.load(sql)
   })
@@ -100,7 +102,11 @@ router.get('/point/:id',(req,res,next)=>{
       lat:data.lat,
       lng:data.lng    
     }
-    console.log(result)
+    result.infor = {
+      name:data.name,
+      distance: data.value,
+      plate_id: data.plate_id
+    }
     res.json(result);
   })
   .catch(err=>{

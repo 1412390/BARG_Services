@@ -70,7 +70,7 @@ function userExist(username) {
 
 router.put('/send_to_driver',function(req,res,next){
   const data = req.body
-  const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}, lat = ${data.lat}, lng=${data.lng}  WHERE id=${data.point_id}`;
+  const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}, lat = ${data.lat}, lng=${data.lng},distance=${data.driver.value}  WHERE id=${data.point_id}`;
   const sql_driver = `UPDATE drivers SET status="busy" WHERE id=${data.driver.id}`;
 
   db.update(sql_driver)

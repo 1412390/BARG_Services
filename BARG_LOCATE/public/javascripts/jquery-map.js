@@ -255,7 +255,7 @@ $(document).ready(function () {
                         point_id: point,
                         driver: send_to_driver,
                         lat: lat,
-                        lng: lng
+                        lng: lng,
                     }
                     axios.put('http://localhost:8080/users/send_to_driver', data)
                         .then(response => {
