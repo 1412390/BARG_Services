@@ -67,6 +67,7 @@ function userExist(username) {
 }
 
 /* GET users listing. */
+
 router.put('/send_to_driver',function(req,res,next){
   const data = req.body
   const sql = `UPDATE point SET status = 1 , driver_id=${data.driver.id}, lat = ${data.lat}, lng=${data.lng}  WHERE id=${data.point_id}`;

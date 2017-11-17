@@ -1,4 +1,4 @@
-let val = null;
+
 $(document).ready(function () {
     let socket = io('http://localhost:8000');
     let socket_id = null;
@@ -9,7 +9,7 @@ $(document).ready(function () {
     socket.on('send-socket_id-connected', function (id) {
        socket_id = id;
     });
-    function addDataToTr(point)
+    function addDataToTr(point,address)
     {
         point.type === 0 ? point.type = "Thường" : point.type = "Premium";
         switch(point.status){
@@ -24,8 +24,9 @@ $(document).ready(function () {
                 break;
             default:
                 break;
-        }
-        return '<tr><td>'+point.id+'</td><td>'+point.address+'</td><td>'+point.type+'</td><td>'+point.note+'</td><td>'+point.status+'</td></tr>';
+        } 
+        if(address) return `<tr><td>${point.id}</td><td>${point.address}</td><td>${point.type}</td><td>${point.note}</td><td><a href=http://localhost:3002/users/switchboard/${point.id}>Vị Trí</a></td></tr>`;
+        else return '<tr><td>'+point.id+'</td><td>'+point.address+'</td><td>'+point.type+'</td><td>'+point.note+'</td><td>'+point.status+'</td></tr>';
     }
     function toastMsg(msg) {
         $("#animate" ).html(msg);
@@ -77,7 +78,7 @@ $(document).ready(function () {
                 let tr = '';
                 for(i=0; i< response.data.ls_point.length; i++) {
 
-                    tr += addDataToTr(response.data.ls_point[i]);
+                    tr += addDataToTr(response.data.ls_point[i],true);
                 }
                 if(currentview === 2){
                     $('#tbody').html(tr);
