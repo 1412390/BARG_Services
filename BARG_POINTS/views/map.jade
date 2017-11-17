@@ -3,7 +3,7 @@ html
     head
         title= title
     body
-        #map
+        #map(style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);")
         script.
             function initMap(){
                 var directionsService = new google.maps.DirectionsService;
@@ -24,7 +24,6 @@ html
                     let start,end;
                     start = response.data.user
                     end = response.data.driver
-                    console.log("asdf",start,end)
                     start= new google.maps.LatLng(start)
                     end = new google.maps.LatLng(end)
                     var request = {
