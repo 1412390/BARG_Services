@@ -81,4 +81,30 @@ router.get('/drivers',(req,res,next)=>{
     res.send(err)
   })
 })
+router.get('/point/:id',(req,res,next)=>{
+  let sql = `select * from point where id=${req.params.id}`
+  let result={}
+  db.load(sql)
+  .then(response=>{
+    let data = response[0]
+    result.user={
+      lat:data.lat,
+      lng:data.lng     
+    }
+    sql = `select * from drivers where id = ${data.driver_id}`
+    return db.load(sql)
+  })
+  .then(response=>{
+    let data = response[0]
+    result.driver={
+      lat:data.lat,
+      lng:data.lng    
+    }
+    console.log(result)
+    res.json(result);
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+})
 module.exports = router;

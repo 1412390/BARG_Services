@@ -10,7 +10,7 @@ a {
 #animate{
     top: 0;
     right: 0;
-    position: absolute;
+    /* position: absolute; */
     width: 210px; /*width of your image*/
     height:50px; /*height of your image*/
     background-color: orange;

@@ -291,7 +291,6 @@ $(document).ready(function () {
     });
     socket.on('recieve-data-from-database', function (data) {
         //confrim this locater recieved point
-        console.log("recieve-data-from-database", data)
         point = data.id;
         const update_point = {
             user_id: $('#hidden').data('user'),

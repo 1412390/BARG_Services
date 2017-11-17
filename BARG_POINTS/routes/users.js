@@ -24,6 +24,9 @@ router.get('/login', function (req, res, next) {
         errors: "",
     });
 });
+router.get('/switchboard/:id',function(req,res,next){
+    res.render('map',{title:"Details point"});
+})
 router.post('/login', function (req, res, next) {
 
     let username = req.body.username;
