@@ -56,7 +56,11 @@ function filterDriversWithRadius(drivers, radius, center, directionsService) {
                 })
                 .then(function (array_results) {
                     array_results = array_results.filter(item => !!item)
-                    resolve(array_results)
+                    if(radius===parseInt(1000) && array_result.length===0){
+                        axios.del(``)
+                    }else{
+                        resolve(array_results)
+                    }
                 })
         }
     })
@@ -138,7 +142,6 @@ function generateMotoBikeLocation(drivers, center, map, directionsDisplay) {
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(30, 30)
     };
-    console.log("105", drivers.length)
     // let min = drivers[0].value
     // let min_pos=null
     for (let i = 0; i < drivers.length; i++) {
