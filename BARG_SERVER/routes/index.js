@@ -70,6 +70,18 @@ router.get('/', function (req, res, next) {
     title: 'Express'
   });
 });
+router.put('/point-status',(req,res,next)=>{
+  let data = req.body
+  console.log("server",data)
+  let sql = `update point set status=${data.status} where id=${data.id}`
+  db.update(sql)
+  .then(result=>{
+    res.send("OK");
+  })
+  .catch(err=>{ 
+    console.log(err)
+  })
+})
 router.get('/drivers',(req,res,next)=>{
   let filter = req.query.filter
   const sql = filter ? `select * from drivers where status='${filter}'` : `select * from drivers`

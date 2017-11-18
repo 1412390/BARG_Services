@@ -8,6 +8,7 @@ let min_driver
 let circle
 let motobike_arr = []
 let send_to_driver
+let point = null
 var default_position = {
     lat: 10.7666851,
     lng: 106.641758
@@ -56,8 +57,20 @@ function filterDriversWithRadius(drivers, radius, center, directionsService) {
                 })
                 .then(function (array_results) {
                     array_results = array_results.filter(item => !!item)
-                    if(radius===parseInt(1000) && array_result.length===0){
-                        axios.del(``)
+                    if(parseInt(radius) === 1000 && array_results.length===0){
+                        let data={
+                            status: 2,
+                            id: point
+                        }
+                        console.log("65",data)
+                        axios.put('http://localhost:8080/point-status',data)
+                        .then(response => {
+                            alert("Không có xe nào xung quanh! Vui lòng đặt lại")
+                            location.reload()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                     }else{
                         resolve(array_results)
                     }
@@ -239,7 +252,6 @@ function fetchDrivers(filter, display) {
 }
 $(document).ready(function () {
     let socket = io('http://localhost:8000');
-    let point = null
     $('#send_to_driver').on('click', function () {
         console.log('ls drivers '  , send_to_driver);
         if (!send_to_driver) {
