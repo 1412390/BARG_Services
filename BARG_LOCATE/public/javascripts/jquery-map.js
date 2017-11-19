@@ -321,4 +321,12 @@ $(document).ready(function () {
     socket.on('send-socket_id-connected', function (socket_id) {
         $('#hidden').attr('data-socket', socket_id);
     });
+
+    $('#btn_arrow_left').on('click', function(){
+        $('#detail').hide();
+        return false;
+    });
+    $('#btn_arrow_right').on('click', function(){
+        $('#detail').show();
+    });
 });

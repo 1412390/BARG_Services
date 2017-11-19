@@ -7,7 +7,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
-#floating-panel {
+#floating-panel{
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+#detail {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,3 +24,17 @@ html, body {
     width: 420px;
 
 }
+#btn_arrow_left{
+    border: 0;
+    background: transparent;
+    right: 0;
+    position: absolute;
+    margin-top: -10px;
+}
+#btn_arrow_right{
+    position: fixed;
+    margin-top: 10%;
+    z-index: 1;
+    border: 0;
+    background: transparent;
+ }
