@@ -4,12 +4,14 @@ block content
     .container
         .main
             .left-main
-                a.list-group-item.list-group-item-action(href='/')
-                    img(src='/images/user/logo.png', style="margin-left: 50px;")
-                ul.list-group
-                    a.list-group-item.list-group-item-action#1(href='javascript:void(0)') Thông tin tài khoản
-                    a.list-group-item.list-group-item-action#2(href='/users/switchboard') Tông đài trực tuyến
+                .left-main-header
 
+                .left-main-body
+                    ul.list-group
+                        a.list-group-item.list-group-item-action(href='/') Trang chủ
+                        a.list-group-item.list-group-item-action#1(href='javascript:void(0)') Thông tin tài khoản
+                        a.list-group-item.list-group-item-action#2(href='/users/switchboard') Tông đài trực tuyến
+                .left-main-footer
             .right-main
                 .right-main-header
 

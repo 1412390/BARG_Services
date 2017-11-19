@@ -21,6 +21,16 @@ body{
 
 }
 
+.left-main-header{
+    margin-top: 2px;
+    height: 154px;
+    border: 1px solid gainsboro;
+    background-image: url("../images/logo_1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .right-main{
     width: 75%;
     float: right;

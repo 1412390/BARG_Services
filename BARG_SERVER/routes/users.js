@@ -192,7 +192,6 @@ router.post('/get-information', function (req, res, next) {
     )
     .then(
     data => {
-      console.log("data150",data)
       let dob = new Date(data[0].dob * 1000);
       data[0].dob = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
       return res.json({
