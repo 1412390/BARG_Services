@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="maps.jade" pinned="false" current-in-tab="true">
+      <file leaf-file-name="maps.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/users/maps.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+            <state relative-caret-position="380">
+              <caret line="29" column="12" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jquery-map.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jquery-map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="827">
-              <caret line="326" column="21" lean-forward="true" selection-start-line="326" selection-start-column="21" selection-end-line="326" selection-end-column="21" />
+            <state relative-caret-position="151">
+              <caret line="102" column="48" lean-forward="true" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -57,7 +57,7 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
+            <state relative-caret-position="7290">
               <caret line="405" column="14" lean-forward="true" selection-start-line="405" selection-start-column="14" selection-end-line="405" selection-end-column="14" />
               <folding />
             </state>
@@ -67,7 +67,7 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../BARG_PHONE/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7380">
+            <state relative-caret-position="7416">
               <caret line="412" column="18" lean-forward="true" selection-start-line="412" selection-start-column="18" selection-end-line="412" selection-end-column="18" />
               <folding />
             </state>
@@ -77,7 +77,7 @@
       <file leaf-file-name="index.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../BARG_POINTS/views/index.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="7956">
               <caret line="442" column="12" lean-forward="false" selection-start-line="442" selection-start-column="12" selection-end-line="442" selection-end-column="12" />
               <folding />
             </state>
@@ -87,7 +87,7 @@
       <file leaf-file-name="query-user.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/query-user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="324">
               <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding />
             </state>
@@ -152,6 +152,7 @@
       <find>Đăng Nhập</find>
       <find>Hợp Tác</find>
       <find>/users/register</find>
+      <find>false</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -173,13 +174,13 @@
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/layout/style_layout_user.css" />
         <option value="$PROJECT_DIR$/views/users/profile.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/jquery-map.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/layout/style_layout_maps.css" />
         <option value="$PROJECT_DIR$/views/users/maps.jade" />
         <option value="$PROJECT_DIR$/../BARG_PHONE/views/index.jade" />
         <option value="$PROJECT_DIR$/../BARG_POINTS/views/index.jade" />
         <option value="$PROJECT_DIR$/views/index.jade" />
         <option value="$PROJECT_DIR$/views/users/layout/layout_2.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/jquery-map.js" />
       </list>
     </option>
   </component>
@@ -215,6 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,12 +283,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BARG_PHONE" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BARG_POINTS" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.6.0" />
@@ -356,12 +357,13 @@
       <workItem from="1511056604497" duration="470000" />
       <workItem from="1511087370532" duration="1408000" />
       <workItem from="1511106061924" duration="4565000" />
-      <workItem from="1511326835864" duration="3842000" />
+      <workItem from="1511326835864" duration="3978000" />
+      <workItem from="1511333576432" duration="663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99744000" />
+    <option name="totallyTimeSpent" value="100543000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="721" extended-state="6" />
@@ -632,7 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="106" lean-forward="false" selection-start-line="12" selection-start-column="106" selection-end-line="12" selection-end-column="106" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -646,7 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="31" column="10" lean-forward="false" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -657,7 +657,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../BARG_PHONE/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7380">
+        <state relative-caret-position="7416">
           <caret line="412" column="18" lean-forward="true" selection-start-line="412" selection-start-column="18" selection-end-line="412" selection-end-column="18" />
           <folding />
         </state>
@@ -665,7 +665,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../BARG_POINTS/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="7956">
           <caret line="442" column="12" lean-forward="false" selection-start-line="442" selection-start-column="12" selection-end-line="442" selection-end-column="12" />
           <folding />
         </state>
@@ -673,7 +673,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="7290">
           <caret line="405" column="14" lean-forward="true" selection-start-line="405" selection-start-column="14" selection-end-line="405" selection-end-column="14" />
           <folding />
         </state>
@@ -689,7 +689,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/query-user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="324">
           <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
           <folding />
         </state>
@@ -711,14 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="827">
-          <caret line="326" column="21" lean-forward="true" selection-start-line="326" selection-start-column="21" selection-end-line="326" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/users/layout/layout_2.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -729,8 +721,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/users/maps.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        <state relative-caret-position="380">
+          <caret line="29" column="12" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/jquery-map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="102" column="48" lean-forward="true" selection-start-line="102" selection-start-column="48" selection-end-line="102" selection-end-column="48" />
           <folding />
         </state>
       </provider>

@@ -106,7 +106,7 @@ function geocodePosition(pos) {
             };
             infowindow.setContent(responses[0].formatted_address + "<br>coordinates: " + marker.getPosition().toUrlValue(6));
             marker.setIcon(icon);
-            marker.setDraggable(false);
+           // marker.setDraggable(false);
         } else {
             infowindow.setContent('Cannot determine address at this location.');
         }
