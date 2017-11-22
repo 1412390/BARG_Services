@@ -80,6 +80,8 @@ io.on('connection', function (socket) {
 
                     data.point_id = response.data.id;
 
+                    console.log('Locate socket_id: ', LOCATE.socket_id);
+
                     if (LOCATE.socket_id.length > 0) {//pop any locater and send point to them
                         var shift = LOCATE.socket_id.shift();
                         io.to(shift).emit("recieve-data-from-phonis", data);
