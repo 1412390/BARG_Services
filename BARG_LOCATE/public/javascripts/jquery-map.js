@@ -321,7 +321,11 @@ $(document).ready(function () {
     socket.on('send-socket_id-connected', function (socket_id) {
         $('#hidden').attr('data-socket', socket_id);
     });
-
+    function warning()
+    {
+        let socket_id =  $('#hidden').attr('data-socket');
+        return socket.emit('remove-socket-id', socket_id);
+    }
     $('#btn_arrow_left').on('click', function(){
         $('#detail').hide();
         return false;
@@ -329,4 +333,5 @@ $(document).ready(function () {
     $('#btn_arrow_right').on('click', function(){
         $('#detail').show();
     });
+    window.onbeforeunload = warning;
 });

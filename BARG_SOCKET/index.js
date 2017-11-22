@@ -19,6 +19,7 @@ io.on('connection', function (socket) {
     socket.on('LOCATE', function (user_id) {
 
         console.log('Locate conected');
+    
         const data = {
             user_id: user_id
         };
@@ -111,6 +112,9 @@ io.on('connection', function (socket) {
         POINT.socket_id.forEach(function (id) {
             io.to(id).emit("get-point-located");
         });
+    });
+    socket.on('remove-socket-id', function(value){
+        LOCATE.socket_id = LOCATE.socket_id.filter(item => item !== value);
     });
 });
 app.listen(8000, function () {
